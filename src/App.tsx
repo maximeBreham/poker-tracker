@@ -1,8 +1,9 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { aggregate } from "@/core/aggregate";
 import { dateTime } from "@/lib/format";
 import { useDatabase } from "@/app/useDatabase";
 import { Hero } from "@/components/dashboard/Hero";
+import { SettingsPanel } from "@/components/dashboard/SettingsPanel";
 import {
   ActionButton,
   EmptyState,
@@ -54,9 +55,15 @@ function App() {
   }, [mono]);
 
   const db = useDatabase();
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
+  // La bankroll affichée = départ + net poker + ajustement externe (mouvements non-poker).
+  // On injecte l'ajustement dans la base de calcul → bankroll & courbe collent au solde réel,
+  // sans toucher au net/ROI poker (indépendants de la bankroll de départ).
+  const effectiveStart = db.startingBankroll + db.externalAdjustment;
   const agg = useMemo(
-    () => aggregate(db.tournois, db.startingBankroll),
-    [db.tournois, db.startingBankroll],
+    () => aggregate(db.tournois, effectiveStart),
+    [db.tournois, effectiveStart],
   );
 
   if (db.mode === "loading") {
@@ -82,6 +89,7 @@ function App() {
 
   const actions = isDemo ? null : (
     <>
+      <ActionButton onClick={() => setSettingsOpen(true)}>⚙ Réglages</ActionButton>
       <ActionButton onClick={db.rescan} disabled={db.busy || !db.folder}>
         {db.busy ? "…" : "⟳ Rescanner"}
       </ActionButton>
@@ -111,7 +119,7 @@ function App() {
 
       {filled ? (
         <div style={{ flex: 1, padding: 28, display: "flex", flexDirection: "column", gap: 20, boxSizing: "border-box" }}>
-          <Hero agg={agg} startingBankroll={db.startingBankroll} />
+          <Hero agg={agg} startingBankroll={db.startingBankroll} externalAdjustment={db.externalAdjustment} />
           <KpiRow agg={agg} />
           <div style={{ display: "grid", gridTemplateColumns: "1.15fr 1fr", gap: 16 }}>
             <MultiplierDistribution agg={agg} />
@@ -121,6 +129,19 @@ function App() {
         </div>
       ) : (
         <EmptyState onPick={db.pickFolder} />
+      )}
+
+      {settingsOpen && (
+        <SettingsPanel
+          onClose={() => setSettingsOpen(false)}
+          startingBankroll={db.startingBankroll}
+          externalAdjustment={db.externalAdjustment}
+          pokerNet={agg.net}
+          onSave={(start, adj) => {
+            void db.setStartingBankroll(start);
+            void db.setExternalAdjustment(adj);
+          }}
+        />
       )}
     </Frame>
   );

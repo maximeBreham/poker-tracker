@@ -7,6 +7,12 @@ import type { Tournoi } from "@/parsing/types";
 export interface Settings {
   /** Bankroll de départ (défaut 50 €), persistée. */
   startingBankroll: number;
+  /**
+   * Ajustement externe en € (mouvements non-poker : paris sportifs, dépôts/retraits).
+   * Le portefeuille Winamax étant partagé, ce delta recale la bankroll affichée sur le solde réel
+   * sans polluer le net/ROI poker. Calculé depuis le « solde réel actuel » saisi par l'utilisateur.
+   */
+  externalAdjustment: number;
   /** Dossier history sélectionné/détecté. */
   folder: string | null;
   /** Dernier scan (ISO). */
@@ -26,6 +32,7 @@ export const DEFAULT_APP_DATA: AppData = {
   version: 1,
   settings: {
     startingBankroll: 50,
+    externalAdjustment: 0,
     folder: null,
     lastScan: null,
     scannedFiles: {},

@@ -14,9 +14,11 @@ const mono = "var(--font-mono)";
 export function Hero({
   agg,
   startingBankroll,
+  externalAdjustment = 0,
 }: {
   agg: Aggregates;
   startingBankroll: number;
+  externalAdjustment?: number;
 }) {
   const gain = agg.net >= 0;
   const tone = gain ? "var(--gain)" : "var(--loss)";
@@ -41,6 +43,14 @@ export function Hero({
           <div style={{ marginTop: 10, fontSize: 13, color: "#A1A1AA", fontFamily: mono }}>
             Départ {eur(startingBankroll)} ·{" "}
             <span style={{ color: tone }}>{signedEur(agg.net)} net</span>
+            {externalAdjustment !== 0 && (
+              <>
+                {" · "}
+                <span style={{ color: externalAdjustment >= 0 ? "var(--gain)" : "var(--loss)" }}>
+                  {signedEur(externalAdjustment)} externe
+                </span>
+              </>
+            )}
           </div>
         </div>
         <div style={{ display: "flex", gap: 28, paddingTop: 4 }}>

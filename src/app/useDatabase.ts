@@ -129,6 +129,15 @@ export function useDatabase() {
     await storage.save(data);
   }, []);
 
+  const setExternalAdjustment = useCallback(async (n: number) => {
+    const data: AppData = {
+      ...dataRef.current,
+      settings: { ...dataRef.current.settings, externalAdjustment: n },
+    };
+    setAppData(data);
+    await storage.save(data);
+  }, []);
+
   const tournois = mode === "demo" ? demoTournois : Object.values(appData.tournois);
 
   return {
@@ -139,9 +148,11 @@ export function useDatabase() {
     folder: appData.settings.folder,
     lastScan: appData.settings.lastScan,
     startingBankroll: mode === "demo" ? 50 : appData.settings.startingBankroll,
+    externalAdjustment: mode === "demo" ? 0 : appData.settings.externalAdjustment,
     pickFolder,
     rescan,
     resetData,
     setStartingBankroll,
+    setExternalAdjustment,
   };
 }
