@@ -1,8 +1,10 @@
-import { useEffect, useId, useMemo, useRef } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { BankrollPoint } from "@/core/aggregate";
+import { dateTime, eur, signedEur } from "@/lib/format";
 
 // Géométrie (reprend le viewBox de la maquette PokerDash).
 const W = 1200;
+const H = 300;
 const TOP = 34;
 const BOTTOM = 278;
 const FLOOR = 284; // base de l'aplat
@@ -30,6 +32,12 @@ function hitRadius(m: number): number {
   return 4;
 }
 
+interface GameNode {
+  x: number;
+  y: number;
+  p: BankrollPoint;
+}
+
 export function BankrollCurve({
   points,
   startingBankroll,
@@ -38,7 +46,9 @@ export function BankrollCurve({
   startingBankroll: number;
 }) {
   const lineRef = useRef<SVGPathElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
   const gradId = useId();
+  const [hovered, setHovered] = useState<number | null>(null);
 
   const geo = useMemo(() => {
     const values = [startingBankroll, ...points.map((p) => p.bankroll)];
@@ -54,19 +64,16 @@ export function BankrollCurve({
     const line = nodes.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(" ");
     const area = `M0 ${FLOOR} ${line} L ${W} ${FLOOR} Z`;
 
+    // Nœuds de partie (hors point de départ) — cibles de survol.
+    const gameNodes: GameNode[] = points.map((p, i) => ({ x: nodes[i + 1].x, y: nodes[i + 1].y, p }));
+
     // Hits : parties gagnantes avec multiplicateur (taille ∝ multiplicateur).
-    const hits = points
-      .map((p, i) => ({ p, node: nodes[i + 1] }))
-      .filter(({ p }) => p.multiplier !== null && p.profit > 0)
-      .map(({ p, node }) => ({
-        cx: node.x,
-        cy: node.y,
-        m: p.multiplier as number,
-        profit: p.profit,
-      }));
+    const hits = gameNodes
+      .filter((gn) => gn.p.multiplier !== null && gn.p.profit > 0)
+      .map((gn) => ({ cx: gn.x, cy: gn.y, m: gn.p.multiplier as number }));
 
     const tickY = ticks.map((v) => ({ v, y: y(v) }));
-    return { line, area, hits, tickY, n };
+    return { line, area, hits, tickY, n, gameNodes };
   }, [points, startingBankroll]);
 
   // Animation du tracé (stroke-dashoffset), comme la maquette.
@@ -90,9 +97,34 @@ export function BankrollCurve({
     });
   }, [geo.line]);
 
+  // Survol : trouve le nœud le plus proche en x (robuste même quand les points sont denses).
+  function handleMove(e: React.MouseEvent) {
+    const svg = svgRef.current;
+    if (!svg || geo.gameNodes.length === 0) return;
+    const pt = svg.createSVGPoint();
+    pt.x = e.clientX;
+    pt.y = e.clientY;
+    const ctm = svg.getScreenCTM();
+    if (!ctm) return;
+    const loc = pt.matrixTransform(ctm.inverse());
+    let best = 0;
+    let bd = Infinity;
+    geo.gameNodes.forEach((gn, i) => {
+      const d = Math.abs(gn.x - loc.x);
+      if (d < bd) {
+        bd = d;
+        best = i;
+      }
+    });
+    setHovered(best);
+  }
+
+  const hn = hovered !== null ? geo.gameNodes[hovered] : null;
+
   return (
     <div style={{ marginTop: 20, position: "relative" }}>
       <svg
+        ref={svgRef}
         viewBox="0 0 1240 300"
         width="100%"
         style={{ display: "block", overflow: "visible" }}
@@ -106,12 +138,12 @@ export function BankrollCurve({
         </defs>
 
         {/* gridlines + labels d'axe */}
-        <g stroke="#27272A" strokeWidth="1">
+        <g stroke="#27272A" strokeWidth="1" pointerEvents="none">
           {geo.tickY.map((t) => (
             <line key={t.v} x1="0" y1={t.y} x2={W} y2={t.y} opacity="0.55" />
           ))}
         </g>
-        <g fontFamily="var(--font-mono)" fontSize="11" fill="#52525B" textAnchor="start">
+        <g fontFamily="var(--font-mono)" fontSize="11" fill="#52525B" textAnchor="start" pointerEvents="none">
           {geo.tickY.map((t) => (
             <text key={t.v} x={W + 8} y={t.y + 4}>
               {Math.round(t.v)}&nbsp;€
@@ -119,14 +151,14 @@ export function BankrollCurve({
           ))}
         </g>
 
-        {/* aplat */}
+        {/* aplat + ligne */}
         <path
           className="bk-anim"
           style={{ animation: "bkFade 700ms ease 200ms backwards" }}
           d={geo.area}
           fill={`url(#${gradId})`}
+          pointerEvents="none"
         />
-        {/* ligne */}
         <path
           ref={lineRef}
           d={geo.line}
@@ -135,42 +167,52 @@ export function BankrollCurve({
           strokeWidth="1.6"
           strokeLinejoin="round"
           strokeLinecap="round"
+          pointerEvents="none"
         />
 
-        {/* hits multiplicateurs */}
-        {geo.hits.map((h, i) => {
-          const r = hitRadius(h.m);
-          const halo = h.m >= 5;
-          const label = h.m >= 25;
-          return (
-            <g
-              key={i}
-              className="bk-anim"
-              style={{
-                animation: `bkPop 520ms cubic-bezier(.2,.7,.2,1) ${700 + i * 60}ms backwards`,
-                transformBox: "fill-box",
-                transformOrigin: "center",
-              }}
-            >
-              {halo && <circle cx={h.cx} cy={h.cy} r={r + 7} fill="var(--point)" opacity="0.13" />}
-              <circle cx={h.cx} cy={h.cy} r={r} fill="var(--point)" />
-              {label && (
-                <text
-                  x={h.cx - 16}
-                  y={h.cy - 6}
-                  textAnchor="end"
-                  fontFamily="var(--font-mono)"
-                  fontSize="13"
-                  fontWeight="500"
-                  fill="#FAFAFA"
-                >
-                  ×{h.m}
-                </text>
-              )}
-            </g>
-          );
-        })}
+        {/* hits multiplicateurs (décoratifs) */}
+        <g pointerEvents="none">
+          {geo.hits.map((h, i) => {
+            const r = hitRadius(h.m);
+            const halo = h.m >= 5;
+            const label = h.m >= 25;
+            return (
+              <g
+                key={i}
+                className="bk-anim"
+                style={{
+                  animation: `bkPop 520ms cubic-bezier(.2,.7,.2,1) ${700 + i * 60}ms backwards`,
+                  transformBox: "fill-box",
+                  transformOrigin: "center",
+                }}
+              >
+                {halo && <circle cx={h.cx} cy={h.cy} r={r + 7} fill="var(--point)" opacity="0.13" />}
+                <circle cx={h.cx} cy={h.cy} r={r} fill="var(--point)" />
+                {label && (
+                  <text x={h.cx - 16} y={h.cy - 6} textAnchor="end" fontFamily="var(--font-mono)" fontSize="13" fontWeight="500" fill="#FAFAFA">
+                    ×{h.m}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </g>
+
+        {/* point survolé : guide vertical + halo */}
+        {hn && (
+          <g pointerEvents="none">
+            <line x1={hn.x} y1={TOP} x2={hn.x} y2={BOTTOM} stroke="#3F3F46" strokeWidth="1" strokeDasharray="3 3" />
+            <circle cx={hn.x} cy={hn.y} r="5.5" fill="var(--curve)" stroke="#09090B" strokeWidth="2" />
+          </g>
+        )}
+
+        {/* zone de capture du survol */}
+        <rect x="0" y="0" width={W} height={H} fill="transparent" onMouseMove={handleMove} onMouseLeave={() => setHovered(null)} />
+
+        {/* infobulle */}
+        {hn && <Tooltip node={hn} />}
       </svg>
+
       <div
         style={{
           display: "flex",
@@ -185,6 +227,30 @@ export function BankrollCurve({
         <span>partie {geo.n}</span>
       </div>
     </div>
+  );
+}
+
+function Tooltip({ node }: { node: GameNode }) {
+  const boxW = 224;
+  const boxH = 66;
+  const bx = Math.max(0, Math.min(node.x - boxW / 2, W - boxW));
+  const above = node.y - boxH - 16 >= 0;
+  const by = above ? node.y - boxH - 16 : node.y + 16;
+  const gain = node.p.profit >= 0;
+  return (
+    <g pointerEvents="none">
+      <rect x={bx} y={by} width={boxW} height={boxH} rx="8" fill="#0E0E11" stroke="#27272A" strokeWidth="1" />
+      <text x={bx + 14} y={by + 21} fontFamily="var(--font-mono)" fontSize="12" fill="#A1A1AA">
+        {dateTime(node.p.date)}
+      </text>
+      <text x={bx + 14} y={by + 42} fontFamily="var(--font-mono)" fontSize="15" fontWeight="600" fill="#FAFAFA">
+        {eur(node.p.bankroll)}
+      </text>
+      <text x={bx + 14} y={by + 59} fontFamily="var(--font-mono)" fontSize="13">
+        <tspan fill={gain ? "var(--gain)" : "var(--loss)"}>{signedEur(node.p.profit)}</tspan>
+        {node.p.multiplier !== null && <tspan fill="#71717A"> · ×{node.p.multiplier}</tspan>}
+      </text>
+    </g>
   );
 }
 

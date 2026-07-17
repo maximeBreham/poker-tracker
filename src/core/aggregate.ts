@@ -15,6 +15,9 @@ export interface BankrollPoint {
 export interface MultiplierBucket {
   multiplier: number;
   count: number;
+  wins: number; // parties gagnées (profit > 0)
+  losses: number;
+  net: number; // résultat net cumulé pour ce multiplicateur
 }
 
 export interface FormatStat {
@@ -87,11 +90,24 @@ export function aggregate(
     return { date: t.startedAt, bankroll: running, profit: t.profit, multiplier: t.multiplier };
   });
 
-  // Distribution des multiplicateurs (Expressos uniquement)
-  const distMap = new Map<number, number>();
-  for (const m of multipliers) distMap.set(m, (distMap.get(m) ?? 0) + 1);
+  // Distribution des multiplicateurs (Expressos uniquement) : count + gagnés/perdus + net
+  const distMap = new Map<number, { count: number; wins: number; net: number }>();
+  for (const t of tournois) {
+    if (t.multiplier === null) continue;
+    const e = distMap.get(t.multiplier) ?? { count: 0, wins: 0, net: 0 };
+    e.count += 1;
+    if (t.profit > 0) e.wins += 1;
+    e.net = round2(e.net + t.profit);
+    distMap.set(t.multiplier, e);
+  }
   const distribution: MultiplierBucket[] = [...distMap.entries()]
-    .map(([multiplier, count]) => ({ multiplier, count }))
+    .map(([multiplier, e]) => ({
+      multiplier,
+      count: e.count,
+      wins: e.wins,
+      losses: e.count - e.wins,
+      net: e.net,
+    }))
     .sort((a, b) => a.multiplier - b.multiplier);
 
   // Répartition par format

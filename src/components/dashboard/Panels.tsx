@@ -95,32 +95,40 @@ export function KpiRow({ agg }: { agg: Aggregates }) {
 export function MultiplierDistribution({ agg }: { agg: Aggregates }) {
   const total = agg.distribution.reduce((s, b) => s + b.count, 0);
   const maxCount = Math.max(1, ...agg.distribution.map((b) => b.count));
-  const topMult = agg.biggestMultiplier;
   return (
     <div style={{ ...CARD, padding: "22px 24px" }}>
       <div style={{ fontSize: 13, fontWeight: 600, color: "#FAFAFA" }}>Distribution des multiplicateurs</div>
       <div style={{ fontSize: 12, color: "#71717A", marginTop: 3 }}>Expressos · {total} parties</div>
-      <div style={{ marginTop: 20, display: "flex", flexDirection: "column", gap: 13 }}>
+      <div style={{ marginTop: 20, display: "flex", flexDirection: "column", gap: 16 }}>
         {agg.distribution.length === 0 && (
           <div style={{ fontSize: 13, color: "#52525B" }}>Aucun Expresso.</div>
         )}
         {agg.distribution.map((b) => {
-          const isTop = b.multiplier === topMult;
+          const winsPct = b.count ? (b.wins / b.count) * 100 : 0;
+          const lossPct = b.count ? (b.losses / b.count) * 100 : 0;
           return (
-            <div key={b.multiplier} style={{ display: "flex", alignItems: "center", gap: 14 }}>
-              <span style={{ width: 38, fontFamily: MONO, fontSize: 13, color: "#A1A1AA", textAlign: "right" }}>×{b.multiplier}</span>
-              <div style={{ flex: 1, height: 8, background: "#1A1A1E", borderRadius: 999, overflow: "hidden" }}>
+            <div key={b.multiplier} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                <span style={{ width: 38, fontFamily: MONO, fontSize: 13, color: "#A1A1AA", textAlign: "right" }}>×{b.multiplier}</span>
                 <div
-                  style={{
-                    width: `${(b.count / maxCount) * 100}%`,
-                    height: "100%",
-                    background: isTop ? "var(--point)" : "var(--accent-indigo)",
-                    opacity: isTop ? 1 : 0.85,
-                    borderRadius: 999,
-                  }}
-                />
+                  style={{ flex: 1, height: 8, background: "#1A1A1E", borderRadius: 999, overflow: "hidden" }}
+                  title={`${b.wins} gagnés / ${b.losses} perdus · net ${signedEur(b.net)}`}
+                >
+                  {/* portion remplie ∝ volume, scindée gagné (vert) / perdu (rouge) */}
+                  <div style={{ width: `${(b.count / maxCount) * 100}%`, height: "100%", display: "flex", borderRadius: 999, overflow: "hidden" }}>
+                    <div style={{ width: `${winsPct}%`, height: "100%", background: "var(--gain)" }} />
+                    <div style={{ width: `${lossPct}%`, height: "100%", background: "var(--loss)", opacity: 0.55 }} />
+                  </div>
+                </div>
+                <span style={{ width: 30, fontFamily: MONO, fontSize: 13, color: "#FAFAFA", textAlign: "right", fontVariantNumeric: "tabular-nums" }}>{b.count}</span>
               </div>
-              <span style={{ width: 44, fontFamily: MONO, fontSize: 13, color: "#FAFAFA", textAlign: "right", fontVariantNumeric: "tabular-nums" }}>{b.count}</span>
+              <div style={{ marginLeft: 52, display: "flex", gap: 16, fontFamily: MONO, fontSize: 12 }}>
+                <span style={{ color: tone(b.net), width: 74 }}>{signedEur(b.net)}</span>
+                <span style={{ color: "#71717A" }}>
+                  <span style={{ color: "var(--gain)" }}>{b.wins} gagnés</span> ·{" "}
+                  <span style={{ color: "#A1A1AA" }}>{b.losses} perdus</span>
+                </span>
+              </div>
             </div>
           );
         })}
