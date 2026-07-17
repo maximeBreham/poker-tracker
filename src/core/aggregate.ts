@@ -14,6 +14,7 @@ export interface BankrollPoint {
 
 export interface MultiplierBucket {
   multiplier: number;
+  buyIn: number; // niveau de buy-in (Expresso 0,50 € vs Nitro 1 € peuvent partager un multiplicateur)
   count: number;
   wins: number; // parties gagnées (profit > 0)
   losses: number;
@@ -90,25 +91,27 @@ export function aggregate(
     return { date: t.startedAt, bankroll: running, profit: t.profit, multiplier: t.multiplier };
   });
 
-  // Distribution des multiplicateurs (Expressos uniquement) : count + gagnés/perdus + net
-  const distMap = new Map<number, { count: number; wins: number; net: number }>();
+  // Distribution des multiplicateurs (Expressos uniquement), par buy-in + multiplicateur
+  const distMap = new Map<string, { buyIn: number; multiplier: number; count: number; wins: number; net: number }>();
   for (const t of tournois) {
     if (t.multiplier === null) continue;
-    const e = distMap.get(t.multiplier) ?? { count: 0, wins: 0, net: 0 };
+    const key = `${t.buyIn}#${t.multiplier}`;
+    const e = distMap.get(key) ?? { buyIn: t.buyIn, multiplier: t.multiplier, count: 0, wins: 0, net: 0 };
     e.count += 1;
     if (t.profit > 0) e.wins += 1;
     e.net = round2(e.net + t.profit);
-    distMap.set(t.multiplier, e);
+    distMap.set(key, e);
   }
-  const distribution: MultiplierBucket[] = [...distMap.entries()]
-    .map(([multiplier, e]) => ({
-      multiplier,
+  const distribution: MultiplierBucket[] = [...distMap.values()]
+    .map((e) => ({
+      multiplier: e.multiplier,
+      buyIn: e.buyIn,
       count: e.count,
       wins: e.wins,
       losses: e.count - e.wins,
       net: e.net,
     }))
-    .sort((a, b) => a.multiplier - b.multiplier);
+    .sort((a, b) => a.buyIn - b.buyIn || a.multiplier - b.multiplier);
 
   // Répartition par format
   const fmtMap = new Map<FormatStat["key"], { parties: number; invested: number; net: number }>();

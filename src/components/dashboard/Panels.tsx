@@ -107,9 +107,12 @@ export function MultiplierDistribution({ agg }: { agg: Aggregates }) {
           const winsPct = b.count ? (b.wins / b.count) * 100 : 0;
           const lossPct = b.count ? (b.losses / b.count) * 100 : 0;
           return (
-            <div key={b.multiplier} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <div key={`${b.buyIn}-${b.multiplier}`} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                <span style={{ width: 38, fontFamily: MONO, fontSize: 13, color: "#A1A1AA", textAlign: "right" }}>×{b.multiplier}</span>
+                <div style={{ width: 52, display: "flex", flexDirection: "column", alignItems: "flex-end", lineHeight: 1.15 }}>
+                  <span style={{ fontFamily: MONO, fontSize: 13, color: "#A1A1AA" }}>×{b.multiplier}</span>
+                  <span style={{ fontFamily: MONO, fontSize: 11, color: "#52525B" }}>{eur(b.buyIn)}</span>
+                </div>
                 <div
                   style={{ flex: 1, height: 8, background: "#1A1A1E", borderRadius: 999, overflow: "hidden" }}
                   title={`${b.wins} gagnés / ${b.losses} perdus · net ${signedEur(b.net)}`}
@@ -122,7 +125,7 @@ export function MultiplierDistribution({ agg }: { agg: Aggregates }) {
                 </div>
                 <span style={{ width: 30, fontFamily: MONO, fontSize: 13, color: "#FAFAFA", textAlign: "right", fontVariantNumeric: "tabular-nums" }}>{b.count}</span>
               </div>
-              <div style={{ marginLeft: 52, display: "flex", gap: 16, fontFamily: MONO, fontSize: 12 }}>
+              <div style={{ marginLeft: 66, display: "flex", gap: 16, fontFamily: MONO, fontSize: 12 }}>
                 <span style={{ color: tone(b.net), width: 74 }}>{signedEur(b.net)}</span>
                 <span style={{ color: "#71717A" }}>
                   <span style={{ color: "var(--gain)" }}>{b.wins} gagnés</span> ·{" "}
