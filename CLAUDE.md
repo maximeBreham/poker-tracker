@@ -95,6 +95,12 @@ src-tauri/       coquille Tauri (tauri.conf.json, capabilities/, Rust minimal)
 - **Push de `.github/workflows/**`** : nécessite le scope `workflow` sur le token gh
   (`gh auth refresh -h github.com -s workflow`). Acquis.
 - **Node dans distrobox** : installé via NodeSource (nvm avait échoué).
+- **AppImage écran blanc sur certains GPU/Wayland** : WebKitGTK peut échouer avec
+  `Could not create default EGL display: EGL_BAD_PARAMETER` (observé sur AMD RDNA3 + Wayland),
+  donnant une fenêtre blanche, sans que `WEBKIT_DISABLE_DMABUF_RENDERER` / `WEBKIT_DISABLE_COMPOSITING_MODE`
+  / `LIBGL_ALWAYS_SOFTWARE` / `GDK_BACKEND=x11` n'y changent rien. Contournement fiable : lancer le
+  binaire release (`npm run tauri build -- --no-bundle`) depuis un environnement aux libs cohérentes
+  (ici : le conteneur distrobox), plutôt que l'AppImage. Les autres OS (Windows/macOS) ne sont pas concernés.
 
 ## Distribution / Release
 
