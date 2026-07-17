@@ -2,7 +2,8 @@
  * Agrégats & KPIs à partir d'une liste de tournois (TS pur, testable sans UI).
  * Base : §Agrégats calculés du brief.
  */
-import type { Tournoi } from "@/parsing/types";
+import type { Format, Tournoi } from "@/parsing/types";
+import { parisMonthKey, parisMonthLabel } from "@/lib/format";
 
 export interface BankrollPoint {
   date: string; // ISO UTC du tournoi
@@ -11,18 +12,55 @@ export interface BankrollPoint {
   multiplier: number | null;
 }
 
-export interface Aggregates {
-  volume: number; // nombre de tournois
-  invested: number; // total misé
-  returned: number; // total récupéré
-  net: number; // returned - invested
-  roi: number; // net / invested (0 si rien investi)
-  bankrollCurrent: number; // startingBankroll + net
-  avgBuyIn: number; // invested / volume
-  biggestMultiplier: number | null;
-  biggestWin: number; // plus gros profit sur un tournoi
-  bankrollCurve: BankrollPoint[];
+export interface MultiplierBucket {
+  multiplier: number;
+  count: number;
 }
+
+export interface FormatStat {
+  key: "expresso" | "mtt" | "other";
+  label: string;
+  parties: number;
+  invested: number;
+  net: number;
+  roi: number;
+}
+
+export interface MonthStat {
+  key: string; // "2026-07"
+  label: string; // "Juillet 2026"
+  parties: number;
+  net: number;
+  roi: number;
+}
+
+export interface Aggregates {
+  volume: number;
+  invested: number;
+  returned: number;
+  net: number;
+  roi: number;
+  bankrollCurrent: number;
+  avgBuyIn: number;
+  biggestMultiplier: number | null;
+  biggestWin: number;
+  bankrollCurve: BankrollPoint[];
+  distribution: MultiplierBucket[];
+  formatSplit: FormatStat[];
+  monthly: MonthStat[];
+}
+
+const FORMAT_GROUP: Record<Format, FormatStat["key"]> = {
+  expresso: "expresso",
+  expresso_nitro: "expresso",
+  mtt: "mtt",
+  other: "other",
+};
+const FORMAT_GROUP_LABEL: Record<FormatStat["key"], string> = {
+  expresso: "Expresso",
+  mtt: "MTT",
+  other: "Autre",
+};
 
 export function aggregate(
   tournois: Tournoi[],
@@ -46,13 +84,62 @@ export function aggregate(
   let running = startingBankroll;
   const bankrollCurve: BankrollPoint[] = sorted.map((t) => {
     running = round2(running + t.profit);
-    return {
-      date: t.startedAt,
-      bankroll: running,
-      profit: t.profit,
-      multiplier: t.multiplier,
-    };
+    return { date: t.startedAt, bankroll: running, profit: t.profit, multiplier: t.multiplier };
   });
+
+  // Distribution des multiplicateurs (Expressos uniquement)
+  const distMap = new Map<number, number>();
+  for (const m of multipliers) distMap.set(m, (distMap.get(m) ?? 0) + 1);
+  const distribution: MultiplierBucket[] = [...distMap.entries()]
+    .map(([multiplier, count]) => ({ multiplier, count }))
+    .sort((a, b) => a.multiplier - b.multiplier);
+
+  // Répartition par format
+  const fmtMap = new Map<FormatStat["key"], { parties: number; invested: number; net: number }>();
+  for (const t of tournois) {
+    const key = FORMAT_GROUP[t.format];
+    const cur = fmtMap.get(key) ?? { parties: 0, invested: 0, net: 0 };
+    cur.parties += 1;
+    cur.invested = round2(cur.invested + t.buyIn);
+    cur.net = round2(cur.net + t.profit);
+    fmtMap.set(key, cur);
+  }
+  const formatSplit: FormatStat[] = [...fmtMap.entries()]
+    .map(([key, v]) => ({
+      key,
+      label: FORMAT_GROUP_LABEL[key],
+      parties: v.parties,
+      invested: v.invested,
+      net: v.net,
+      roi: v.invested > 0 ? v.net / v.invested : 0,
+    }))
+    .sort((a, b) => b.parties - a.parties);
+
+  // Bilan mensuel (Europe/Paris)
+  const monMap = new Map<string, { label: string; parties: number; invested: number; net: number }>();
+  for (const t of tournois) {
+    if (!t.startedAt) continue;
+    const key = parisMonthKey(t.startedAt);
+    const cur = monMap.get(key) ?? {
+      label: parisMonthLabel(t.startedAt),
+      parties: 0,
+      invested: 0,
+      net: 0,
+    };
+    cur.parties += 1;
+    cur.invested = round2(cur.invested + t.buyIn);
+    cur.net = round2(cur.net + t.profit);
+    monMap.set(key, cur);
+  }
+  const monthly: MonthStat[] = [...monMap.entries()]
+    .map(([key, v]) => ({
+      key,
+      label: v.label,
+      parties: v.parties,
+      net: v.net,
+      roi: v.invested > 0 ? v.net / v.invested : 0,
+    }))
+    .sort((a, b) => a.key.localeCompare(b.key));
 
   return {
     volume,
@@ -65,6 +152,9 @@ export function aggregate(
     biggestMultiplier,
     biggestWin,
     bankrollCurve,
+    distribution,
+    formatSplit,
+    monthly,
   };
 }
 

@@ -1,21 +1,18 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { parseSummaryText } from "@/parsing/parseSummary";
 import type { Tournoi } from "@/parsing/types";
 import { aggregate } from "@/core/aggregate";
+import { Hero } from "@/components/dashboard/Hero";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+  EmptyState,
+  FormatSplit,
+  KpiRow,
+  MonthlyTable,
+  MultiplierDistribution,
+  TopBar,
+} from "@/components/dashboard/Panels";
+
+const STARTING_BANKROLL = 50;
 
 // Aperçu de dev : charge les fixtures anonymisées à la compilation (Vite ?raw).
 // Sera remplacé par la vraie source de données (dossier Winamax) plus tard.
@@ -25,23 +22,6 @@ const rawFixtures = import.meta.glob("./parsing/__fixtures__/*.txt", {
   eager: true,
 }) as Record<string, string>;
 
-const eur = new Intl.NumberFormat("fr-FR", {
-  style: "currency",
-  currency: "EUR",
-});
-const dt = new Intl.DateTimeFormat("fr-FR", {
-  dateStyle: "short",
-  timeStyle: "short",
-  timeZone: "Europe/Paris",
-});
-
-const FORMAT_LABEL: Record<Tournoi["format"], string> = {
-  expresso: "Expresso",
-  expresso_nitro: "Nitro",
-  mtt: "MTT",
-  other: "Autre",
-};
-
 function useParsedTournois(): Tournoi[] {
   return useMemo(() => {
     const all: Tournoi[] = [];
@@ -49,118 +29,62 @@ function useParsedTournois(): Tournoi[] {
       const name = path.split("/").pop() ?? path;
       all.push(...parseSummaryText(content, name).tournois);
     }
-    return all.sort((a, b) => b.startedAt.localeCompare(a.startedAt));
+    return all;
   }, []);
 }
 
-function Kpi({
-  label,
-  value,
-  tone,
-}: {
-  label: string;
-  value: string;
-  tone?: "gain" | "loss";
-}) {
-  const color =
-    tone === "gain" ? "text-gain" : tone === "loss" ? "text-loss" : "text-foreground";
-  return (
-    <Card className="bg-card">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-[11px] font-semibold uppercase tracking-[0.08em] text-text-tertiary">
-          {label}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className={`font-mono text-[26px] font-medium tnum ${color}`}>
-          {value}
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-
 function App() {
+  const params = new URLSearchParams(window.location.search);
+  const forceEmpty = params.has("empty");
+  const mono = params.has("mono");
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("mono", mono);
+  }, [mono]);
+
   const tournois = useParsedTournois();
-  const agg = useMemo(() => aggregate(tournois, 50), [tournois]);
+  const agg = useMemo(() => aggregate(tournois, STARTING_BANKROLL), [tournois]);
+  const filled = !forceEmpty && agg.volume > 0;
 
   return (
-    <main className="min-h-screen bg-canvas px-7 py-8 text-foreground">
-      <div className="mx-auto max-w-6xl">
-        <header className="mb-6">
-          <h1 className="text-lg font-semibold">Poker Tracker — aperçu de dev</h1>
-          <p className="text-sm text-text-secondary">
-            {tournois.length} tournois parsés depuis les fixtures anonymisées ·
-            bankroll de départ 50&nbsp;€
-          </p>
-        </header>
+    <div style={{ minHeight: "100vh", background: "var(--canvas)", padding: 16, boxSizing: "border-box" }}>
+      <div
+        style={{
+          maxWidth: 1360,
+          margin: "0 auto",
+          minHeight: "calc(100vh - 32px)",
+          background: "#09090B",
+          color: "#FAFAFA",
+          border: "1px solid #27272A",
+          borderRadius: 14,
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          fontFamily: "var(--font-sans)",
+          boxSizing: "border-box",
+        }}
+      >
+        <TopBar
+          connected={filled}
+          sourceLabel="Fixtures (démo)"
+          meta={`${agg.volume} tournois parsés`}
+        />
 
-        <section className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-          <Kpi
-            label="Net"
-            value={eur.format(agg.net)}
-            tone={agg.net >= 0 ? "gain" : "loss"}
-          />
-          <Kpi label="ROI" value={`${(agg.roi * 100).toFixed(1)} %`} tone={agg.roi >= 0 ? "gain" : "loss"} />
-          <Kpi label="Volume" value={String(agg.volume)} />
-          <Kpi label="Bankroll" value={eur.format(agg.bankrollCurrent)} />
-          <Kpi label="Buy-in moyen" value={eur.format(agg.avgBuyIn)} />
-          <Kpi
-            label="Plus gros mult."
-            value={agg.biggestMultiplier ? `×${agg.biggestMultiplier}` : "—"}
-          />
-          <Kpi label="Plus gros gain" value={eur.format(agg.biggestWin)} tone="gain" />
-          <Kpi label="Investi" value={eur.format(agg.invested)} />
-        </section>
-
-        <Card className="bg-card">
-          <CardHeader>
-            <CardTitle className="text-sm font-semibold">Tournois</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Format</TableHead>
-                  <TableHead className="text-right">Buy-in</TableHead>
-                  <TableHead className="text-right">Place</TableHead>
-                  <TableHead className="text-right">Mult.</TableHead>
-                  <TableHead className="text-right">Profit</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {tournois.map((t) => (
-                  <TableRow key={t.dedupKey}>
-                    <TableCell className="font-mono text-xs text-text-secondary tnum">
-                      {t.startedAt ? dt.format(new Date(t.startedAt)) : "—"}
-                    </TableCell>
-                    <TableCell>{FORMAT_LABEL[t.format]}</TableCell>
-                    <TableCell className="text-right font-mono tnum">
-                      {eur.format(t.buyIn)}
-                    </TableCell>
-                    <TableCell className="text-right font-mono tnum">
-                      {t.finishPlace ?? "—"}
-                    </TableCell>
-                    <TableCell className="text-right font-mono tnum">
-                      {t.multiplier ? `×${t.multiplier}` : "—"}
-                    </TableCell>
-                    <TableCell
-                      className={`text-right font-mono tnum ${
-                        t.profit >= 0 ? "text-gain" : "text-loss"
-                      }`}
-                    >
-                      {t.profit >= 0 ? "+" : ""}
-                      {eur.format(t.profit)}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
+        {filled ? (
+          <div style={{ flex: 1, padding: 28, display: "flex", flexDirection: "column", gap: 20, boxSizing: "border-box" }}>
+            <Hero agg={agg} startingBankroll={STARTING_BANKROLL} />
+            <KpiRow agg={agg} />
+            <div style={{ display: "grid", gridTemplateColumns: "1.15fr 1fr", gap: 16 }}>
+              <MultiplierDistribution agg={agg} />
+              <FormatSplit agg={agg} />
+            </div>
+            <MonthlyTable agg={agg} />
+          </div>
+        ) : (
+          <EmptyState />
+        )}
       </div>
-    </main>
+    </div>
   );
 }
 
