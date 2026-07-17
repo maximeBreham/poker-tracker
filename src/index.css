@@ -1,0 +1,146 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Design system — Tracker poker Winamax
+  Tokens issus de la maquette validée (brief §Design system), variante A (accent indigo).
+  Thème sombre par défaut : les valeurs vivent directement dans :root.
+  Variante B (monochrome) : ajouter la classe `.mono` sur <html> (n'override que accent/curve/point).
+*/
+:root {
+  color-scheme: dark;
+
+  /* Radius de référence (cartes 12px) */
+  --radius: 0.75rem;
+
+  /* --- Palette shadcn standard --- */
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: #131316;
+  --card-foreground: #fafafa;
+  --popover: #131316;
+  --popover-foreground: #fafafa;
+  --primary: #7e8ce0;
+  --primary-foreground: #09090b;
+  --secondary: #1a1a1e;
+  --secondary-foreground: #fafafa;
+  --muted: #1a1a1e;
+  --muted-foreground: #a1a1aa;
+  --accent: #1a1a1e;
+  --accent-foreground: #fafafa;
+  --destructive: #d96b6b;
+  --destructive-foreground: #fafafa;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #7e8ce0;
+
+  /* --- Tokens custom (hors palette shadcn) --- */
+  --canvas: #050506;          /* fond « canvas » externe */
+  --empty-panel: #0e0e11;     /* panneau état vide */
+  --rail: #1a1a1e;            /* fond des barres/rails */
+  --row-separator: #1f1f23;   /* séparateur de ligne (table) */
+  --dotted: #3f3f46;          /* pointillé (état vide) */
+
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
+  --text-faint: #52525b;
+
+  /* Sémantique (seules couleurs saturées) */
+  --gain: #59b98a;
+  --loss: #d96b6b;
+
+  /* Accent / courbe / point (variante A) */
+  --accent-indigo: #7e8ce0;
+  --curve: #7e8ce0;
+  --point: #aab4f2;
+  --link-hover: #9aa6f0;
+
+  /* Familles de polices (Geist chargé via @fontsource, fallbacks inclus) */
+  --font-sans: "Geist Variable", "Geist", "Inter", system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Variante B — monochrome : n'override que le trio accent/courbe/point (brief) */
+.mono {
+  --accent-indigo: #8a8a93;
+  --primary: #8a8a93;
+  --ring: #8a8a93;
+  --curve: #d4d4d8;
+  --point: #e4e4e7;
+}
+
+/* Exposition des tokens en utilitaires Tailwind (bg-*, text-*, border-*, etc.) */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Tokens custom exposés en utilitaires */
+  --color-canvas: var(--canvas);
+  --color-empty-panel: var(--empty-panel);
+  --color-rail: var(--rail);
+  --color-row-separator: var(--row-separator);
+  --color-dotted: var(--dotted);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-faint: var(--text-faint);
+  --color-gain: var(--gain);
+  --color-loss: var(--loss);
+  --color-accent-indigo: var(--accent-indigo);
+  --color-curve: var(--curve);
+  --color-point: var(--point);
+  --color-link-hover: var(--link-hover);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html,
+  body {
+    @apply bg-canvas text-foreground;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Chiffres tabulaires par défaut sur les montants (classe .tnum) */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Respect de prefers-reduced-motion (brief §Motion) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

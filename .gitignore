@@ -1,0 +1,39 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Données perso / base locale — NE JAMAIS committer (100% local, cf. brief)
+# (la base réelle vit dans le répertoire de données de l'app, hors repo ;
+#  ces motifs protègent tout fichier de données qui atterrirait dans le repo)
+*.db
+*.sqlite
+*.sqlite3
+/data/
+*.winamax.json
+# NB : les fixtures ANONYMISÉES (src/parsing/__fixtures__/) SONT versionnées (jeu de test).
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
