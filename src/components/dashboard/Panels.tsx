@@ -21,10 +21,12 @@ export function TopBar({
   connected,
   sourceLabel,
   meta,
+  actions,
 }: {
   connected: boolean;
   sourceLabel: string;
   meta?: string;
+  actions?: React.ReactNode;
 }) {
   return (
     <div
@@ -43,16 +45,81 @@ export function TopBar({
         <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.01em", color: "#FAFAFA" }}>Bankroll</span>
         <span style={{ fontSize: 11, color: "#52525B", fontWeight: 500 }}>/ suivi personnel</span>
       </div>
-      {connected ? (
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ width: 6, height: 6, borderRadius: 999, background: "var(--gain)" }} />
-            <span style={{ fontFamily: MONO, fontSize: 12, color: "#A1A1AA" }}>{sourceLabel}</span>
+      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        {connected ? (
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ width: 6, height: 6, borderRadius: 999, background: "var(--gain)" }} />
+              <span style={{ fontFamily: MONO, fontSize: 12, color: "#A1A1AA", maxWidth: 260, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{sourceLabel}</span>
+            </div>
+            {meta && <span style={{ fontFamily: MONO, fontSize: 12, color: "#71717A" }}>{meta}</span>}
           </div>
-          {meta && <span style={{ fontFamily: MONO, fontSize: 12, color: "#71717A" }}>{meta}</span>}
-        </div>
-      ) : (
-        <span style={{ fontFamily: MONO, fontSize: 12, color: "#52525B" }}>Aucune source connectée</span>
+        ) : (
+          <span style={{ fontFamily: MONO, fontSize: 12, color: "#52525B" }}>Aucune source connectée</span>
+        )}
+        {actions}
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- Bouton d'action discret (top bar) ---------------- */
+export function ActionButton({
+  onClick,
+  disabled,
+  children,
+  tone: t,
+}: {
+  onClick?: () => void;
+  disabled?: boolean;
+  children: React.ReactNode;
+  tone?: "danger";
+}) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      style={{
+        font: "inherit",
+        fontSize: 12,
+        fontWeight: 500,
+        color: t === "danger" ? "var(--loss)" : "#A1A1AA",
+        background: "transparent",
+        border: "1px solid #27272A",
+        borderRadius: 8,
+        padding: "5px 10px",
+        cursor: disabled ? "default" : "pointer",
+        opacity: disabled ? 0.5 : 1,
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
+/* ---------------- Bandeau rapport d'import ---------------- */
+export function ReportBanner({
+  reparsed,
+  parsedTournois,
+  ignored,
+  firstErrorRaw,
+}: {
+  reparsed: number;
+  parsedTournois: number;
+  ignored: number;
+  firstErrorRaw?: string;
+}) {
+  return (
+    <div style={{ margin: "0 28px", marginTop: 20, border: "1px solid #27272A", borderRadius: 10, background: "#0E0E11", padding: "12px 16px" }}>
+      <div style={{ fontFamily: MONO, fontSize: 12, color: "#A1A1AA" }}>
+        Import · <span style={{ color: "var(--gain)" }}>{parsedTournois} tournois</span> depuis {reparsed} fichier(s) ·{" "}
+        <span style={{ color: ignored ? "var(--loss)" : "#71717A" }}>{ignored} bloc(s) ignoré(s)</span>
+      </div>
+      {ignored > 0 && firstErrorRaw && (
+        <details style={{ marginTop: 8 }}>
+          <summary style={{ fontSize: 12, color: "#71717A", cursor: "pointer" }}>Aperçu du 1ᵉʳ fichier non reconnu</summary>
+          <pre style={{ marginTop: 8, fontFamily: MONO, fontSize: 11, color: "#71717A", whiteSpace: "pre-wrap", maxHeight: 160, overflow: "auto" }}>{firstErrorRaw}</pre>
+        </details>
       )}
     </div>
   );
