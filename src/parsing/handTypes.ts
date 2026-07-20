@@ -75,6 +75,10 @@ export interface Main {
   numero: number;
   /** Lien vers Tournoi.id (nombre entre parenthèses du nom de table). */
   tournoiId: string;
+  /** Nom du tournoi lu dans l'en-tête (ex. "Expresso", "SPACE KO"). */
+  tournoiNom: string;
+  /** Buy-in total en € (somme des composantes de l'en-tête). */
+  buyIn: number;
 
   /** ISO 8601 UTC, tel que lu. */
   startedAt: string;

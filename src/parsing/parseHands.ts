@@ -20,7 +20,7 @@ import type {
   Street,
   StreetData,
 } from "./handTypes";
-import { toIsoUtc } from "./derive";
+import { toIsoUtc, parseBuyInAmounts, round2 } from "./derive";
 
 const BLOCK_MARKER = 'Winamax Poker - Tournament "';
 
@@ -52,19 +52,21 @@ function parseHand(block: string, sourceFile: string): Main | null {
   // --- En-tête : nom, buy-in, level, HandId, blinds, date ---
   // Winamax Poker - Tournament "Expresso" buyIn: … level: 1 - HandId: #…-1-… - Holdem no limit (10/20) - 2026/07/18 20:42:58 UTC
   const head = lines[0].match(
-    /Tournament "(.+?)".*level: (\d+) - HandId: (#(\d+)-(\d+)-\d+) - .+?\(([\d/]+)\) - (\d{4}\/\d{2}\/\d{2}) (\d{2}:\d{2}:\d{2}) UTC/,
+    /Tournament "(.+?)" buyIn: (.+?) level: (\d+) - HandId: (#(\d+)-(\d+)-\d+) - .+?\(([\d/]+)\) - (\d{4}\/\d{2}\/\d{2}) (\d{2}:\d{2}:\d{2}) UTC/,
   );
   if (!head) return null;
-  const level = parseInt(head[2], 10);
-  const id = head[3];
-  const numero = parseInt(head[5], 10);
-  const blindParts = head[6].split("/").map((n) => parseInt(n, 10));
+  const tournoiNom = head[1].trim();
+  const buyIn = round2(parseBuyInAmounts(head[2]).reduce((a, b) => a + b, 0));
+  const level = parseInt(head[3], 10);
+  const id = head[4];
+  const numero = parseInt(head[6], 10);
+  const blindParts = head[7].split("/").map((n) => parseInt(n, 10));
   // 2 valeurs = sb/bb (Expresso) ; 3 valeurs = ante/sb/bb (KO/MTT).
   const blinds =
     blindParts.length >= 3
       ? { ante: blindParts[0], sb: blindParts[1], bb: blindParts[2] }
       : { ante: 0, sb: blindParts[0], bb: blindParts[1] };
-  const startedAt = toIsoUtc(head[7], head[8]);
+  const startedAt = toIsoUtc(head[8], head[9]);
 
   // --- Table : id de tournoi, maxSeats, bouton ---
   // Table: 'Expresso(1151681541)#0' 3-max (real money) Seat #3 is the button
@@ -195,6 +197,8 @@ function parseHand(block: string, sourceFile: string): Main | null {
     id,
     numero,
     tournoiId,
+    tournoiNom,
+    buyIn,
     startedAt,
     level,
     blinds,

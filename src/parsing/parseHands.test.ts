@@ -35,6 +35,8 @@ describe("parseHands — Expresso 3-max", () => {
     const m = r.mains[0];
     expect(m.id).toBe("#4946434554001883137-1-1784407378");
     expect(m.tournoiId).toBe("1151681541");
+    expect(m.tournoiNom).toBe("Expresso");
+    expect(m.buyIn).toBe(0.5);
     expect(m.level).toBe(1);
     expect(m.blinds).toEqual({ sb: 10, bb: 20, ante: 0 });
     expect(m.maxSeats).toBe(3);
@@ -98,6 +100,8 @@ describe("parseHands — SPACE KO 6-max", () => {
 
   it("lit les blindes à 3 valeurs (ante/sb/bb) et la table 6-max", () => {
     const m = r.mains[0];
+    expect(m.tournoiNom).toBe("SPACE KO");
+    expect(m.buyIn).toBe(2);
     expect(m.blinds).toEqual({ ante: 40, sb: 175, bb: 350 });
     expect(m.maxSeats).toBe(6);
     expect(m.joueurs).toHaveLength(6);
