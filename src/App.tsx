@@ -4,6 +4,8 @@ import { dateTime } from "@/lib/format";
 import { useDatabase } from "@/app/useDatabase";
 import { Hero } from "@/components/dashboard/Hero";
 import { SettingsPanel } from "@/components/dashboard/SettingsPanel";
+import { HandReplay } from "@/components/hands/HandReplay";
+import { loadFixtureMains } from "@/app/fixtures";
 import {
   ActionButton,
   EmptyState,
@@ -56,6 +58,12 @@ function App() {
 
   const db = useDatabase();
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [view, setView] = useState<"dashboard" | "mains">(
+    params.get("view") === "mains" ? "mains" : "dashboard",
+  );
+  // Mains de démonstration (fixtures) : l'ingestion des vraies hand-histories
+  // n'est pas encore branchée sur la datasource → cette vue est en démo.
+  const demoMains = useMemo(() => loadFixtureMains(), []);
 
   // La bankroll affichée = départ + net poker + ajustement externe (mouvements non-poker).
   // On injecte l'ajustement dans la base de calcul → bankroll & courbe collent au solde réel,
@@ -104,31 +112,67 @@ function App() {
     </>
   );
 
+  const nav = (
+    <div style={{ display: "flex", gap: 4, background: "#131316", border: "1px solid #27272A", borderRadius: 9, padding: 3 }}>
+      {(["dashboard", "mains"] as const).map((v) => (
+        <button
+          key={v}
+          onClick={() => setView(v)}
+          style={{
+            font: "inherit",
+            fontSize: 12,
+            fontWeight: 600,
+            color: view === v ? "#09090B" : "#A1A1AA",
+            background: view === v ? "var(--accent-indigo)" : "transparent",
+            border: "none",
+            borderRadius: 7,
+            padding: "5px 12px",
+            cursor: "pointer",
+          }}
+        >
+          {v === "dashboard" ? "Tableau de bord" : "Mains"}
+        </button>
+      ))}
+    </div>
+  );
+
   return (
     <Frame>
-      <TopBar connected={filled} sourceLabel={sourceLabel} meta={meta} actions={actions} />
+      <TopBar
+        connected={filled}
+        sourceLabel={sourceLabel}
+        meta={meta}
+        actions={view === "dashboard" ? actions : undefined}
+        nav={nav}
+      />
 
-      {db.report && (db.report.reparsed > 0 || db.report.ignored > 0) && (
-        <ReportBanner
-          reparsed={db.report.reparsed}
-          parsedTournois={db.report.parsedTournois}
-          ignored={db.report.ignored}
-          firstErrorRaw={db.report.firstError?.raw}
-        />
-      )}
-
-      {filled ? (
-        <div style={{ flex: 1, padding: 28, display: "flex", flexDirection: "column", gap: 20, boxSizing: "border-box" }}>
-          <Hero agg={agg} startingBankroll={db.startingBankroll} externalAdjustment={db.externalAdjustment} />
-          <KpiRow agg={agg} />
-          <div style={{ display: "grid", gridTemplateColumns: "1.15fr 1fr", gap: 16 }}>
-            <MultiplierDistribution agg={agg} />
-            <FormatSplit agg={agg} />
-          </div>
-          <MonthlyTable agg={agg} />
-        </div>
+      {view === "mains" ? (
+        <HandReplay mains={demoMains} />
       ) : (
-        <EmptyState onPick={db.pickFolder} />
+        <>
+          {db.report && (db.report.reparsed > 0 || db.report.ignored > 0) && (
+            <ReportBanner
+              reparsed={db.report.reparsed}
+              parsedTournois={db.report.parsedTournois}
+              ignored={db.report.ignored}
+              firstErrorRaw={db.report.firstError?.raw}
+            />
+          )}
+
+          {filled ? (
+            <div style={{ flex: 1, padding: 28, display: "flex", flexDirection: "column", gap: 20, boxSizing: "border-box" }}>
+              <Hero agg={agg} startingBankroll={db.startingBankroll} externalAdjustment={db.externalAdjustment} />
+              <KpiRow agg={agg} />
+              <div style={{ display: "grid", gridTemplateColumns: "1.15fr 1fr", gap: 16 }}>
+                <MultiplierDistribution agg={agg} />
+                <FormatSplit agg={agg} />
+              </div>
+              <MonthlyTable agg={agg} />
+            </div>
+          ) : (
+            <EmptyState onPick={db.pickFolder} />
+          )}
+        </>
       )}
 
       {settingsOpen && (

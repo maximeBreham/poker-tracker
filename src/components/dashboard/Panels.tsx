@@ -22,11 +22,13 @@ export function TopBar({
   sourceLabel,
   meta,
   actions,
+  nav,
 }: {
   connected: boolean;
   sourceLabel: string;
   meta?: string;
   actions?: React.ReactNode;
+  nav?: React.ReactNode;
 }) {
   return (
     <div
@@ -40,10 +42,13 @@ export function TopBar({
         flex: "none",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <div style={{ width: 8, height: 8, borderRadius: 999, background: "var(--accent-indigo)" }} />
-        <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.01em", color: "#FAFAFA" }}>Bankroll</span>
-        <span style={{ fontSize: 11, color: "#52525B", fontWeight: 500 }}>/ suivi personnel</span>
+      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ width: 8, height: 8, borderRadius: 999, background: "var(--accent-indigo)" }} />
+          <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.01em", color: "#FAFAFA" }}>Bankroll</span>
+          <span style={{ fontSize: 11, color: "#52525B", fontWeight: 500 }}>/ suivi personnel</span>
+        </div>
+        {nav}
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
         {connected ? (
