@@ -1,0 +1,1292 @@
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 4 - HandId: #4810198268682174495-30-1782826166 - Holdem no limit (40/175/350) - 2026/06/30 13:29:26 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #2 is the button
+Seat 1: Hero (20000, 1€ bounty)
+Seat 2: Vilain3 (17175, 1€ bounty)
+Seat 3: Vilain7 (48692, 1.20€ bounty)
+Seat 4: Vilain4 (36896, 1€ bounty)
+Seat 5: Vilain2 (20696, 1€ bounty)
+Seat 6: Vilain1 (20475, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain7 posts ante 40
+Vilain4 posts ante 40
+Hero posts ante 40
+Vilain3 posts ante 40
+Vilain2 posts ante 40
+Vilain1 posts ante 40
+Vilain7 posts small blind 175
+Vilain4 posts big blind 350
+Dealt to Hero [Kd Js]
+*** PRE-FLOP *** 
+Vilain2 folds
+Vilain1 folds
+Hero raises 525 to 875
+Vilain3 raises 1329 to 2204
+Vilain7 folds
+Vilain4 calls 1854
+Hero folds
+*** FLOP *** [9h Ks Qh]
+Vilain4 checks
+Vilain3 bets 3704
+Vilain4 folds
+Vilain3 collected 9402 from pot
+*** SUMMARY ***
+Total pot 9402 | No rake
+Board: [9h Ks Qh]
+Seat 2: Vilain3 (button) won 9402
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 4 - HandId: #4810198268682174495-31-1782826203 - Holdem no limit (40/175/350) - 2026/06/30 13:30:03 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #3 is the button
+Seat 1: Hero (19085, 1€ bounty)
+Seat 2: Vilain3 (20629, 1€ bounty)
+Seat 3: Vilain7 (48477, 1.20€ bounty)
+Seat 4: Vilain4 (34652, 1€ bounty)
+Seat 5: Vilain2 (20656, 1€ bounty)
+Seat 6: Vilain1 (20435, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain4 posts ante 40
+Vilain2 posts ante 40
+Hero posts ante 40
+Vilain3 posts ante 40
+Vilain7 posts ante 40
+Vilain1 posts ante 40
+Vilain4 posts small blind 175
+Vilain2 posts big blind 350
+Dealt to Hero [6h 4s]
+*** PRE-FLOP *** 
+Vilain1 folds
+Hero folds
+Vilain3 calls 350
+Vilain7 raises 1011 to 1361
+Vilain4 folds
+Vilain2 folds
+Vilain3 calls 1011
+*** FLOP *** [Qs 2h 9h]
+Vilain3 checks
+Vilain7 checks
+*** TURN *** [Qs 2h 9h][7c]
+Vilain3 checks
+Vilain7 checks
+*** RIVER *** [Qs 2h 9h 7c][Qd]
+Vilain3 checks
+Vilain7 checks
+*** SHOW DOWN ***
+Vilain3 shows [5s Js] (One pair : Queens)
+Vilain7 shows [Jd Kd] (One pair : Queens)
+Vilain7 collected 3487 from pot
+*** SUMMARY ***
+Total pot 3487 | No rake
+Board: [Qs 2h 9h 7c Qd]
+Seat 2: Vilain3 showed [5s Js] and lost with One pair : Queens
+Seat 3: Vilain7 (button) showed [Jd Kd] and won 3487 with One pair : Queens
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 4 - HandId: #4810198268682174495-32-1782826248 - Holdem no limit (40/175/350) - 2026/06/30 13:30:48 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #4 is the button
+Seat 1: Hero (19045, 1€ bounty)
+Seat 2: Vilain3 (19228, 1€ bounty)
+Seat 3: Vilain7 (50563, 1.20€ bounty)
+Seat 4: Vilain4 (34437, 1€ bounty)
+Seat 5: Vilain2 (20266, 1€ bounty)
+Seat 6: Vilain1 (20395, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain2 posts ante 40
+Vilain1 posts ante 40
+Hero posts ante 40
+Vilain3 posts ante 40
+Vilain7 posts ante 40
+Vilain4 posts ante 40
+Vilain2 posts small blind 175
+Vilain1 posts big blind 350
+Dealt to Hero [Ks 8d]
+*** PRE-FLOP *** 
+Hero folds
+Vilain3 folds
+Vilain7 raises 383 to 733
+Vilain4 folds
+Vilain2 folds
+Vilain1 folds
+Vilain7 collected 1498 from pot
+*** SUMMARY ***
+Total pot 1498 | No rake
+Seat 3: Vilain7 won 1498
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 4 - HandId: #4810198268682174495-33-1782826270 - Holdem no limit (40/175/350) - 2026/06/30 13:31:10 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #5 is the button
+Seat 1: Hero (19005, 1€ bounty)
+Seat 2: Vilain3 (19188, 1€ bounty)
+Seat 3: Vilain7 (51288, 1.20€ bounty)
+Seat 4: Vilain4 (34397, 1€ bounty)
+Seat 5: Vilain2 (20051, 1€ bounty)
+Seat 6: Vilain1 (20005, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain1 posts ante 40
+Hero posts ante 40
+Vilain3 posts ante 40
+Vilain7 posts ante 40
+Vilain4 posts ante 40
+Vilain2 posts ante 40
+Vilain1 posts small blind 175
+Hero posts big blind 350
+Dealt to Hero [7d Kh]
+*** PRE-FLOP *** 
+Vilain3 calls 350
+Vilain7 folds
+Vilain4 folds
+Vilain2 raises 350 to 700
+Vilain1 folds
+Hero folds
+Vilain3 calls 350
+*** FLOP *** [Td 4c 4d]
+Vilain3 checks
+Vilain2 checks
+*** TURN *** [Td 4c 4d][3h]
+Vilain3 checks
+Vilain2 checks
+*** RIVER *** [Td 4c 4d 3h][Qd]
+Vilain3 checks
+Vilain2 checks
+*** SHOW DOWN ***
+Vilain3 shows [Jc 6s] (One pair : 4)
+Vilain2 shows [9h Ad] (One pair : 4)
+Vilain2 collected 2165 from pot
+*** SUMMARY ***
+Total pot 2165 | No rake
+Board: [Td 4c 4d 3h Qd]
+Seat 2: Vilain3 showed [Jc 6s] and lost with One pair : 4
+Seat 5: Vilain2 (button) showed [9h Ad] and won 2165 with One pair : 4
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 5 - HandId: #4810198268682174495-34-1782826328 - Holdem no limit (50/200/400) - 2026/06/30 13:32:08 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #6 is the button
+Seat 1: Hero (18615, 1€ bounty)
+Seat 2: Vilain3 (18448, 1€ bounty)
+Seat 3: Vilain7 (51248, 1.20€ bounty)
+Seat 4: Vilain4 (34357, 1€ bounty)
+Seat 5: Vilain2 (21476, 1€ bounty)
+Seat 6: Vilain1 (19790, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Hero posts ante 50
+Vilain3 posts ante 50
+Vilain7 posts ante 50
+Vilain4 posts ante 50
+Vilain2 posts ante 50
+Vilain1 posts ante 50
+Hero posts small blind 200
+Vilain3 posts big blind 400
+Dealt to Hero [4h Kd]
+*** PRE-FLOP *** 
+Vilain7 raises 450 to 850
+Vilain4 folds
+Vilain2 calls 850
+Vilain1 folds
+Hero folds
+Vilain3 folds
+*** FLOP *** [7s 5s 8h]
+Vilain7 bets 1300
+Vilain2 folds
+Vilain7 collected 3900 from pot
+*** SUMMARY ***
+Total pot 3900 | No rake
+Board: [7s 5s 8h]
+Seat 3: Vilain7 won 3900
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 5 - HandId: #4810198268682174495-35-1782826371 - Holdem no limit (50/200/400) - 2026/06/30 13:32:51 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #1 is the button
+Seat 1: Hero (18365, 1€ bounty)
+Seat 2: Vilain3 (17998, 1€ bounty)
+Seat 3: Vilain7 (52948, 1.20€ bounty)
+Seat 4: Vilain4 (34307, 1€ bounty)
+Seat 5: Vilain2 (20576, 1€ bounty)
+Seat 6: Vilain1 (19740, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain3 posts ante 50
+Vilain7 posts ante 50
+Hero posts ante 50
+Vilain4 posts ante 50
+Vilain2 posts ante 50
+Vilain1 posts ante 50
+Vilain3 posts small blind 200
+Vilain7 posts big blind 400
+Dealt to Hero [Jd Ks]
+*** PRE-FLOP *** 
+Vilain4 folds
+Vilain2 raises 600 to 1000
+Vilain1 folds
+Hero calls 1000
+Vilain3 raises 600 to 1600
+Vilain7 calls 1200
+Vilain2 calls 600
+Hero calls 600
+*** FLOP *** [Ad 3d 9d]
+Vilain3 checks
+Vilain7 checks
+Vilain2 checks
+Hero checks
+*** TURN *** [Ad 3d 9d][8s]
+Vilain3 checks
+Vilain7 checks
+Vilain2 checks
+Hero bets 2345
+Vilain3 folds
+Vilain7 calls 2345
+Vilain2 folds
+*** RIVER *** [Ad 3d 9d 8s][Ah]
+Vilain7 bets 3986
+Hero folds
+Vilain7 collected 15376 from pot
+*** SUMMARY ***
+Total pot 15376 | No rake
+Board: [Ad 3d 9d 8s Ah]
+Seat 3: Vilain7 (big blind) won 15376
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 5 - HandId: #4810198268682174495-36-1782826465 - Holdem no limit (50/200/400) - 2026/06/30 13:34:25 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #2 is the button
+Seat 1: Hero (14370, 1€ bounty)
+Seat 2: Vilain3 (16348, 1€ bounty)
+Seat 3: Vilain7 (60343, 1.20€ bounty)
+Seat 4: Vilain4 (34257, 1€ bounty)
+Seat 5: Vilain2 (18926, 1€ bounty)
+Seat 6: Vilain1 (19690, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain7 posts ante 50
+Vilain4 posts ante 50
+Hero posts ante 50
+Vilain3 posts ante 50
+Vilain2 posts ante 50
+Vilain1 posts ante 50
+Vilain7 posts small blind 200
+Vilain4 posts big blind 400
+Dealt to Hero [Qc Qd]
+*** PRE-FLOP *** 
+Vilain2 calls 400
+Vilain1 folds
+Hero raises 600 to 1000
+Vilain3 calls 1000
+Vilain7 calls 800
+Vilain4 calls 600
+Vilain2 calls 600
+*** FLOP *** [6h Ts Ad]
+Vilain7 checks
+Vilain4 checks
+Vilain2 checks
+Hero bets 1855
+Vilain3 folds
+Vilain7 folds
+Vilain4 folds
+Vilain2 folds
+Hero collected 7155 from pot
+*** SUMMARY ***
+Total pot 7155 | No rake
+Board: [6h Ts Ad]
+Seat 1: Hero won 7155
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 5 - HandId: #4810198268682174495-37-1782826519 - Holdem no limit (50/200/400) - 2026/06/30 13:35:19 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #3 is the button
+Seat 1: Hero (18620, 1€ bounty)
+Seat 2: Vilain3 (15298, 1€ bounty)
+Seat 3: Vilain7 (59293, 1.20€ bounty)
+Seat 4: Vilain4 (33207, 1€ bounty)
+Seat 5: Vilain2 (17876, 1€ bounty)
+Seat 6: Vilain1 (19640, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain4 posts ante 50
+Vilain2 posts ante 50
+Hero posts ante 50
+Vilain3 posts ante 50
+Vilain7 posts ante 50
+Vilain1 posts ante 50
+Vilain4 posts small blind 200
+Vilain2 posts big blind 400
+Dealt to Hero [6s Ah]
+*** PRE-FLOP *** 
+Vilain1 folds
+Hero raises 600 to 1000
+Vilain3 calls 1000
+Vilain7 calls 1000
+Vilain4 folds
+Vilain2 calls 600
+*** FLOP *** [Ks Jd Td]
+Vilain2 checks
+Hero checks
+Vilain3 bets 4500
+Vilain7 calls 4500
+Vilain2 calls 4500
+Hero folds
+*** TURN *** [Ks Jd Td][Kd]
+Vilain2 checks
+Vilain3 bets 9748 and is all-in
+Vilain7 raises 43995 to 53743 and is all-in
+Vilain2 calls 12326 and is all-in
+*** RIVER *** [Ks Jd Td Kd][9c]
+*** SHOW DOWN ***
+Vilain3 shows [Kc 3c] (Trips of Kings)
+Vilain7 shows [7d 9d] (Flush King high)
+Vilain2 shows [Ad 4d] (Flush Ace high)
+Vilain2 collected 52400 from main pot
+Vilain7 collected 41417 from side pot 1
+*** SUMMARY ***
+Total pot 93817 | No rake
+Board: [Ks Jd Td Kd 9c]
+Seat 2: Vilain3 showed [Kc 3c] and lost with Trips of Kings
+Seat 3: Vilain7 (button) showed [7d 9d] and won 41417 with Flush King high
+Seat 5: Vilain2 (big blind) showed [Ad 4d] and won 52400 with Flush Ace high
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 6 - HandId: #4810198268682174495-38-1782826593 - Holdem no limit (60/250/500) - 2026/06/30 13:36:33 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #4 is the button
+Seat 1: Hero (17570, 1€ bounty)
+Seat 3: Vilain7 (41417, 1.20€ bounty)
+Seat 4: Vilain4 (32957, 1€ bounty)
+Seat 5: Vilain2 (52400, 1.20€ bounty)
+Seat 6: Vilain1 (19590, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain2 posts ante 60
+Vilain1 posts ante 60
+Hero posts ante 60
+Vilain7 posts ante 60
+Vilain4 posts ante 60
+Vilain2 posts small blind 250
+Vilain1 posts big blind 500
+Dealt to Hero [4s Kh]
+*** PRE-FLOP *** 
+Hero folds
+Vilain7 folds
+Vilain4 folds
+Vilain2 folds
+Vilain1 collected 1050 from pot
+*** SUMMARY ***
+Total pot 1050 | No rake
+Seat 6: Vilain1 (big blind) won 1050
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 6 - HandId: #4810198268682174495-39-1782826624 - Holdem no limit (60/250/500) - 2026/06/30 13:37:04 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #5 is the button
+Seat 1: Hero (17510, 1€ bounty)
+Seat 3: Vilain7 (41357, 1.20€ bounty)
+Seat 4: Vilain4 (32897, 1€ bounty)
+Seat 5: Vilain2 (52090, 1.20€ bounty)
+Seat 6: Vilain1 (20080, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain1 posts ante 60
+Hero posts ante 60
+Vilain7 posts ante 60
+Vilain4 posts ante 60
+Vilain2 posts ante 60
+Vilain1 posts small blind 250
+Hero posts big blind 500
+Dealt to Hero [4d Js]
+*** PRE-FLOP *** 
+Vilain7 raises 1038 to 1538
+Vilain4 folds
+Vilain2 calls 1538
+Vilain1 folds
+Hero folds
+*** FLOP *** [9s Th 9h]
+Vilain7 bets 3095
+Vilain2 calls 3095
+*** TURN *** [9s Th 9h][3d]
+Vilain7 bets 3611
+Vilain2 calls 3611
+*** RIVER *** [9s Th 9h 3d][Ac]
+Vilain7 bets 6138
+Vilain2 raises 37648 to 43786 and is all-in
+Vilain7 calls 26915 and is all-in
+*** SHOW DOWN ***
+Vilain7 shows [8c Tc] (Two pairs : Tens and 9)
+Vilain2 shows [Jh 9c] (Trips of 9)
+Vilain2 collected 94377 from pot
+*** SUMMARY ***
+Total pot 94377 | No rake
+Board: [9s Th 9h 3d Ac]
+Seat 3: Vilain7 showed [8c Tc] and lost with Two pairs : Tens and 9
+Seat 5: Vilain2 (button) showed [Jh 9c] and won 94377 with Trips of 9
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 6 - HandId: #4810198268682174495-40-1782826684 - Holdem no limit (60/250/500) - 2026/06/30 13:38:04 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #6 is the button
+Seat 1: Hero (16950, 1€ bounty)
+Seat 2: Vilain8 (20000, 1€ bounty)
+Seat 4: Vilain4 (32837, 1€ bounty)
+Seat 5: Vilain2 (94377, 1.44€ bounty)
+Seat 6: Vilain1 (19770, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Hero posts ante 60
+Vilain8 posts ante 60
+Vilain4 posts ante 60
+Vilain2 posts ante 60
+Vilain1 posts ante 60
+Hero posts small blind 250
+Vilain8 posts big blind 500
+Dealt to Hero [4d 3h]
+*** PRE-FLOP *** 
+Vilain4 folds
+Vilain2 raises 750 to 1250
+Vilain1 folds
+Hero folds
+Vilain8 calls 750
+*** FLOP *** [2h 3d Th]
+Vilain8 checks
+Vilain2 bets 1983
+Vilain8 folds
+Vilain2 collected 5033 from pot
+*** SUMMARY ***
+Total pot 5033 | No rake
+Board: [2h 3d Th]
+Seat 5: Vilain2 won 5033
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 6 - HandId: #4810198268682174495-41-1782826715 - Holdem no limit (60/250/500) - 2026/06/30 13:38:35 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #1 is the button
+Seat 1: Hero (16640, 1€ bounty)
+Seat 2: Vilain8 (18690, 1€ bounty)
+Seat 3: Vilain9 (20000, 1€ bounty)
+Seat 4: Vilain4 (32777, 1€ bounty)
+Seat 5: Vilain2 (96117, 1.44€ bounty)
+Seat 6: Vilain1 (19710, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain8 posts ante 60
+Vilain9 posts ante 60
+Hero posts ante 60
+Vilain4 posts ante 60
+Vilain2 posts ante 60
+Vilain1 posts ante 60
+Vilain8 posts small blind 250
+Vilain9 posts big blind 500
+Dealt to Hero [Jh 4h]
+*** PRE-FLOP *** 
+Vilain4 folds
+Vilain2 raises 750 to 1250
+Vilain1 calls 1250
+Hero folds
+Vilain8 folds
+Vilain9 folds
+*** FLOP *** [7s 8d 6c]
+Vilain2 checks
+Vilain1 checks
+*** TURN *** [7s 8d 6c][9s]
+Vilain2 checks
+Vilain1 checks
+*** RIVER *** [7s 8d 6c 9s][2d]
+Vilain2 checks
+Vilain1 bets 1805
+Vilain2 folds
+Vilain1 collected 5415 from pot
+*** SUMMARY ***
+Total pot 5415 | No rake
+Board: [7s 8d 6c 9s 2d]
+Seat 6: Vilain1 won 5415
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 6 - HandId: #4810198268682174495-42-1782826784 - Holdem no limit (60/250/500) - 2026/06/30 13:39:44 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #2 is the button
+Seat 1: Hero (16580, 1€ bounty)
+Seat 2: Vilain8 (18380, 1€ bounty)
+Seat 3: Vilain9 (19440, 1€ bounty)
+Seat 4: Vilain4 (32717, 1€ bounty)
+Seat 5: Vilain2 (94807, 1.44€ bounty)
+Seat 6: Vilain1 (22010, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain9 posts ante 60
+Vilain4 posts ante 60
+Hero posts ante 60
+Vilain8 posts ante 60
+Vilain2 posts ante 60
+Vilain1 posts ante 60
+Vilain9 posts small blind 250
+Vilain4 posts big blind 500
+Dealt to Hero [Qd Qs]
+*** PRE-FLOP *** 
+Vilain2 folds
+Vilain1 folds
+Hero raises 750 to 1250
+Vilain8 folds
+Vilain9 folds
+Vilain4 folds
+Hero collected 2360 from pot
+*** SUMMARY ***
+Total pot 2360 | No rake
+Seat 1: Hero won 2360
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 6 - HandId: #4810198268682174495-43-1782826799 - Holdem no limit (60/250/500) - 2026/06/30 13:39:59 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #3 is the button
+Seat 1: Hero (17630, 1€ bounty)
+Seat 2: Vilain8 (18320, 1€ bounty)
+Seat 3: Vilain9 (19130, 1€ bounty)
+Seat 4: Vilain4 (32157, 1€ bounty)
+Seat 5: Vilain2 (94747, 1.44€ bounty)
+Seat 6: Vilain1 (21950, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain4 posts ante 60
+Vilain2 posts ante 60
+Hero posts ante 60
+Vilain8 posts ante 60
+Vilain9 posts ante 60
+Vilain1 posts ante 60
+Vilain4 posts small blind 250
+Vilain2 posts big blind 500
+Dealt to Hero [4h Td]
+*** PRE-FLOP *** 
+Vilain1 folds
+Hero folds
+Vilain8 folds
+Vilain9 raises 550 to 1050
+Vilain4 folds
+Vilain2 calls 550
+*** FLOP *** [Tc Jc 2d]
+Vilain2 checks
+Vilain9 bets 813
+Vilain2 calls 813
+*** TURN *** [Tc Jc 2d][3h]
+Vilain2 checks
+Vilain9 bets 3252
+Vilain2 calls 3252
+*** RIVER *** [Tc Jc 2d 3h][5s]
+Vilain2 checks
+Vilain9 bets 13955 and is all-in
+Vilain2 folds
+Vilain9 collected 24795 from pot
+*** SUMMARY ***
+Total pot 24795 | No rake
+Board: [Tc Jc 2d 3h 5s]
+Seat 3: Vilain9 (button) won 24795
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 7 - HandId: #4810198268682174495-44-1782826862 - Holdem no limit (70/300/600) - 2026/06/30 13:41:02 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #4 is the button
+Seat 1: Hero (17570, 1€ bounty)
+Seat 2: Vilain8 (18260, 1€ bounty)
+Seat 3: Vilain9 (24795, 1€ bounty)
+Seat 4: Vilain4 (31847, 1€ bounty)
+Seat 5: Vilain2 (89572, 1.44€ bounty)
+Seat 6: Vilain1 (21890, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain2 posts ante 70
+Vilain1 posts ante 70
+Hero posts ante 70
+Vilain8 posts ante 70
+Vilain9 posts ante 70
+Vilain4 posts ante 70
+Vilain2 posts small blind 300
+Vilain1 posts big blind 600
+Dealt to Hero [2h 3h]
+*** PRE-FLOP *** 
+Hero folds
+Vilain8 raises 17590 to 18190 and is all-in
+Vilain9 folds
+Vilain4 folds
+Vilain2 folds
+Vilain1 folds
+Vilain8 collected 19510 from pot
+*** SUMMARY ***
+Total pot 19510 | No rake
+Seat 2: Vilain8 won 19510
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 7 - HandId: #4810198268682174495-45-1782826903 - Holdem no limit (70/300/600) - 2026/06/30 13:41:43 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #5 is the button
+Seat 1: Hero (17500, 1€ bounty)
+Seat 2: Vilain8 (19510, 1€ bounty)
+Seat 3: Vilain9 (24725, 1€ bounty)
+Seat 4: Vilain4 (31777, 1€ bounty)
+Seat 5: Vilain2 (89202, 1.44€ bounty)
+Seat 6: Vilain1 (21220, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain1 posts ante 70
+Hero posts ante 70
+Vilain8 posts ante 70
+Vilain9 posts ante 70
+Vilain4 posts ante 70
+Vilain2 posts ante 70
+Vilain1 posts small blind 300
+Hero posts big blind 600
+Dealt to Hero [8s Tc]
+*** PRE-FLOP *** 
+Vilain8 folds
+Vilain9 folds
+Vilain4 folds
+Vilain2 folds
+Vilain1 raises 600 to 1200
+Hero folds
+Vilain1 collected 2220 from pot
+*** SUMMARY ***
+Total pot 2220 | No rake
+Seat 6: Vilain1 (small blind) won 2220
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 7 - HandId: #4810198268682174495-46-1782826942 - Holdem no limit (70/300/600) - 2026/06/30 13:42:22 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #6 is the button
+Seat 1: Hero (16830, 1€ bounty)
+Seat 2: Vilain8 (19440, 1€ bounty)
+Seat 3: Vilain9 (24655, 1€ bounty)
+Seat 4: Vilain4 (31707, 1€ bounty)
+Seat 5: Vilain2 (89132, 1.44€ bounty)
+Seat 6: Vilain1 (22170, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Hero posts ante 70
+Vilain8 posts ante 70
+Vilain9 posts ante 70
+Vilain4 posts ante 70
+Vilain2 posts ante 70
+Vilain1 posts ante 70
+Hero posts small blind 300
+Vilain8 posts big blind 600
+Dealt to Hero [4c 7d]
+*** PRE-FLOP *** 
+Vilain9 folds
+Vilain4 folds
+Vilain2 folds
+Vilain1 raises 900 to 1500
+Hero folds
+Vilain8 folds
+Vilain1 collected 2820 from pot
+*** SUMMARY ***
+Total pot 2820 | No rake
+Seat 6: Vilain1 (button) won 2820
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 7 - HandId: #4810198268682174495-47-1782826972 - Holdem no limit (70/300/600) - 2026/06/30 13:42:52 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #1 is the button
+Seat 1: Hero (16460, 1€ bounty)
+Seat 2: Vilain8 (18770, 1€ bounty)
+Seat 3: Vilain9 (24585, 1€ bounty)
+Seat 4: Vilain4 (31637, 1€ bounty)
+Seat 5: Vilain2 (89062, 1.44€ bounty)
+Seat 6: Vilain1 (23420, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain8 posts ante 70
+Vilain9 posts ante 70
+Hero posts ante 70
+Vilain4 posts ante 70
+Vilain2 posts ante 70
+Vilain1 posts ante 70
+Vilain8 posts small blind 300
+Vilain9 posts big blind 600
+Dealt to Hero [8d 3c]
+*** PRE-FLOP *** 
+Vilain4 folds
+Vilain2 raises 600 to 1200
+Vilain1 folds
+Hero folds
+Vilain8 folds
+Vilain9 calls 600
+*** FLOP *** [Jc Td Qc]
+Vilain9 checks
+Vilain2 bets 1560
+Vilain9 calls 1560
+*** TURN *** [Jc Td Qc][4c]
+Vilain9 checks
+Vilain2 bets 2184
+Vilain9 calls 2184
+*** RIVER *** [Jc Td Qc 4c][8h]
+Vilain9 bets 7956
+Vilain2 calls 7956
+*** SHOW DOWN ***
+Vilain2 shows [9c Jd] (Straight Queen high)
+Vilain9 shows [Kd 9h] (Straight King high)
+Vilain9 collected 26520 from pot
+*** SUMMARY ***
+Total pot 26520 | No rake
+Board: [Jc Td Qc 4c 8h]
+Seat 3: Vilain9 (big blind) showed [Kd 9h] and won 26520 with Straight King high
+Seat 5: Vilain2 showed [9c Jd] and lost with Straight Queen high
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 7 - HandId: #4810198268682174495-48-1782827021 - Holdem no limit (70/300/600) - 2026/06/30 13:43:41 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #2 is the button
+Seat 1: Hero (16390, 1€ bounty)
+Seat 2: Vilain8 (18400, 1€ bounty)
+Seat 3: Vilain9 (38135, 1€ bounty)
+Seat 4: Vilain4 (31567, 1€ bounty)
+Seat 5: Vilain2 (76092, 1.44€ bounty)
+Seat 6: Vilain1 (23350, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain9 posts ante 70
+Vilain4 posts ante 70
+Hero posts ante 70
+Vilain8 posts ante 70
+Vilain2 posts ante 70
+Vilain1 posts ante 70
+Vilain9 posts small blind 300
+Vilain4 posts big blind 600
+Dealt to Hero [Jd Kh]
+*** PRE-FLOP *** 
+Vilain2 folds
+Vilain1 folds
+Hero raises 900 to 1500
+Vilain8 folds
+Vilain9 folds
+Vilain4 calls 900
+*** FLOP *** [Th 8d 4d]
+Vilain4 bets 2418
+Hero folds
+Vilain4 collected 6138 from pot
+*** SUMMARY ***
+Total pot 6138 | No rake
+Board: [Th 8d 4d]
+Seat 4: Vilain4 (big blind) won 6138
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 8 - HandId: #4810198268682174495-49-1782827072 - Holdem no limit (80/350/700) - 2026/06/30 13:44:32 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #3 is the button
+Seat 1: Hero (14820, 1€ bounty)
+Seat 2: Vilain8 (18330, 1€ bounty)
+Seat 3: Vilain9 (37765, 1€ bounty)
+Seat 4: Vilain4 (33717, 1€ bounty)
+Seat 5: Vilain2 (76022, 1.44€ bounty)
+Seat 6: Vilain1 (23280, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain4 posts ante 80
+Vilain2 posts ante 80
+Hero posts ante 80
+Vilain8 posts ante 80
+Vilain9 posts ante 80
+Vilain1 posts ante 80
+Vilain4 posts small blind 350
+Vilain2 posts big blind 700
+Dealt to Hero [8d 4h]
+*** PRE-FLOP *** 
+Vilain1 raises 700 to 1400
+Hero folds
+Vilain8 folds
+Vilain9 folds
+Vilain4 folds
+Vilain2 calls 700
+*** FLOP *** [7s 4d 7d]
+Vilain2 bets 1815
+Vilain1 calls 1815
+*** TURN *** [7s 4d 7d][Qd]
+Vilain2 checks
+Vilain1 bets 2541
+Vilain2 calls 2541
+*** RIVER *** [7s 4d 7d Qd][2h]
+Vilain2 bets 12342
+Vilain1 calls 12342
+*** SHOW DOWN ***
+Vilain1 shows [As Ad] (Two pairs : Aces and 7)
+Vilain2 shows [Jd Td] (Flush Queen high)
+Vilain2 collected 37026 from pot
+*** SUMMARY ***
+Total pot 37026 | No rake
+Board: [7s 4d 7d Qd 2h]
+Seat 5: Vilain2 (big blind) showed [Jd Td] and won 37026 with Flush Queen high
+Seat 6: Vilain1 showed [As Ad] and lost with Two pairs : Aces and 7
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 8 - HandId: #4810198268682174495-50-1782827128 - Holdem no limit (80/350/700) - 2026/06/30 13:45:28 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #4 is the button
+Seat 1: Hero (14740, 1€ bounty)
+Seat 2: Vilain8 (18250, 1€ bounty)
+Seat 3: Vilain9 (37685, 1€ bounty)
+Seat 4: Vilain4 (33287, 1€ bounty)
+Seat 5: Vilain2 (94870, 1.44€ bounty)
+Seat 6: Vilain1 (5102, 1.20€ bounty)
+*** ANTE/BLINDS ***
+Vilain2 posts ante 80
+Vilain1 posts ante 80
+Hero posts ante 80
+Vilain8 posts ante 80
+Vilain9 posts ante 80
+Vilain4 posts ante 80
+Vilain2 posts small blind 350
+Vilain1 posts big blind 700
+Dealt to Hero [9s Jh]
+*** PRE-FLOP *** 
+Hero folds
+Vilain8 raises 1050 to 1750
+Vilain9 folds
+Vilain4 folds
+Vilain2 calls 1400
+Vilain1 raises 3272 to 5022 and is all-in
+Vilain8 calls 3272
+Vilain2 calls 3272
+*** FLOP *** [Jc Qh 3d]
+Vilain2 bets 89768 and is all-in
+Vilain8 calls 13148 and is all-in
+*** TURN *** [Jc Qh 3d][Jd]
+*** RIVER *** [Jc Qh 3d Jd][Kc]
+*** SHOW DOWN ***
+Vilain1 shows [2s 4s] (One pair : Jacks)
+Vilain8 shows [6d Ad] (One pair : Jacks)
+Vilain2 shows [Tc 6c] (One pair : Jacks)
+Vilain2 collected 76620 from side pot 1
+Vilain8 collected 41842 from main pot
+*** SUMMARY ***
+Total pot 118462 | No rake
+Board: [Jc Qh 3d Jd Kc]
+Seat 2: Vilain8 showed [6d Ad] and won 41842 with One pair : Jacks
+Seat 5: Vilain2 (small blind) showed [Tc 6c] and won 76620 with One pair : Jacks
+Seat 6: Vilain1 (big blind) showed [2s 4s] and lost with One pair : Jacks
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 8 - HandId: #4810198268682174495-51-1782827208 - Holdem no limit (80/350/700) - 2026/06/30 13:46:48 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #5 is the button
+Seat 1: Hero (14660, 1€ bounty)
+Seat 2: Vilain8 (41842, 2.20€ bounty)
+Seat 3: Vilain9 (37605, 1€ bounty)
+Seat 4: Vilain4 (33207, 1€ bounty)
+Seat 5: Vilain2 (76620, 1.44€ bounty)
+*** ANTE/BLINDS ***
+Hero posts ante 80
+Vilain8 posts ante 80
+Vilain9 posts ante 80
+Vilain4 posts ante 80
+Vilain2 posts ante 80
+Hero posts big blind 700
+Dealt to Hero [Td Jh]
+*** PRE-FLOP *** 
+Vilain8 folds
+Vilain9 folds
+Vilain4 raises 1050 to 1750
+Vilain2 calls 1750
+Hero calls 1050
+*** FLOP *** [3s Kh 5c]
+Hero checks
+Vilain4 checks
+Vilain2 bets 2825
+Hero folds
+Vilain4 calls 2825
+*** TURN *** [3s Kh 5c][4s]
+Vilain4 checks
+Vilain2 checks
+*** RIVER *** [3s Kh 5c 4s][6c]
+Vilain4 bets 11300
+Vilain2 folds
+Vilain4 collected 22600 from pot
+*** SUMMARY ***
+Total pot 22600 | No rake
+Board: [3s Kh 5c 4s 6c]
+Seat 4: Vilain4 won 22600
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 8 - HandId: #4810198268682174495-52-1782827263 - Holdem no limit (80/350/700) - 2026/06/30 13:47:43 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #6 is the button
+Seat 1: Hero (12830, 1€ bounty)
+Seat 2: Vilain8 (41762, 2.20€ bounty)
+Seat 3: Vilain9 (37525, 1€ bounty)
+Seat 4: Vilain4 (39852, 1€ bounty)
+Seat 5: Vilain2 (71965, 1.44€ bounty)
+Seat 6: Vilain5 (20000, 1€ bounty)
+*** ANTE/BLINDS ***
+Hero posts ante 80
+Vilain8 posts ante 80
+Vilain9 posts ante 80
+Vilain4 posts ante 80
+Vilain2 posts ante 80
+Hero posts small blind 350
+Vilain8 posts big blind 700
+Dealt to Hero [Ac 2c]
+*** PRE-FLOP *** 
+Vilain9 folds
+Vilain4 raises 1050 to 1750
+Vilain2 calls 1750
+Hero raises 11000 to 12750 and is all-in
+Vilain8 folds
+Vilain4 folds
+Vilain2 calls 11000
+*** FLOP *** [8c 4d 6s]
+*** TURN *** [8c 4d 6s][Ad]
+*** RIVER *** [8c 4d 6s Ad][5h]
+*** SHOW DOWN ***
+Hero shows [Ac 2c] (One pair : Aces)
+Vilain2 shows [Ah 3s] (One pair : Aces)
+Vilain2 collected 14175 from pot
+Hero collected 14175 from pot
+*** SUMMARY ***
+Total pot 28350 | No rake
+Board: [8c 4d 6s Ad 5h]
+Seat 1: Hero (small blind) showed [Ac 2c] and won 14175 with One pair : Aces
+Seat 5: Vilain2 showed [Ah 3s] and won 14175 with One pair : Aces
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 9 - HandId: #4810198268682174495-53-1782827325 - Holdem no limit (100/400/800) - 2026/06/30 13:48:45 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #1 is the button
+Seat 1: Hero (14175, 1€ bounty)
+Seat 2: Vilain8 (40982, 2.20€ bounty)
+Seat 3: Vilain9 (37445, 1€ bounty)
+Seat 4: Vilain4 (38022, 1€ bounty)
+Seat 5: Vilain2 (73310, 1.44€ bounty)
+Seat 6: Vilain5 (20000, 1€ bounty)
+*** ANTE/BLINDS ***
+Vilain8 posts ante 100
+Vilain9 posts ante 100
+Hero posts ante 100
+Vilain4 posts ante 100
+Vilain2 posts ante 100
+Vilain5 posts ante 100
+Vilain8 posts small blind 400
+Vilain9 posts big blind 800
+Dealt to Hero [6c 9d]
+*** PRE-FLOP *** 
+Vilain4 folds
+Vilain2 folds
+Vilain5 folds
+Hero folds
+Vilain8 calls 400
+Vilain9 raises 2000 to 2800
+Vilain8 calls 2000
+*** FLOP *** [Tc Kh 6s]
+Vilain8 checks
+Vilain9 bets 1550
+Vilain8 calls 1550
+*** TURN *** [Tc Kh 6s][3s]
+Vilain8 checks
+Vilain9 bets 6975
+Vilain8 folds
+Vilain9 collected 16275 from pot
+*** SUMMARY ***
+Total pot 16275 | No rake
+Board: [Tc Kh 6s 3s]
+Seat 3: Vilain9 (big blind) won 16275
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 9 - HandId: #4810198268682174495-54-1782827414 - Holdem no limit (100/400/800) - 2026/06/30 13:50:14 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #2 is the button
+Seat 1: Hero (14075, 1€ bounty)
+Seat 2: Vilain8 (36532, 2.20€ bounty)
+Seat 3: Vilain9 (42295, 1€ bounty)
+Seat 4: Vilain4 (37922, 1€ bounty)
+Seat 5: Vilain2 (73210, 1.44€ bounty)
+Seat 6: Vilain5 (19900, 1€ bounty)
+*** ANTE/BLINDS ***
+Vilain9 posts ante 100
+Vilain4 posts ante 100
+Hero posts ante 100
+Vilain8 posts ante 100
+Vilain2 posts ante 100
+Vilain5 posts ante 100
+Vilain9 posts small blind 400
+Vilain4 posts big blind 800
+Dealt to Hero [3c 8d]
+*** PRE-FLOP *** 
+Vilain2 folds
+Vilain5 folds
+Hero folds
+Vilain8 raises 1200 to 2000
+Vilain9 folds
+Vilain4 calls 1200
+*** FLOP *** [Qs Qh Th]
+Vilain4 checks
+Vilain8 bets 2500
+Vilain4 folds
+Vilain8 collected 7500 from pot
+*** SUMMARY ***
+Total pot 7500 | No rake
+Board: [Qs Qh Th]
+Seat 2: Vilain8 (button) won 7500
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 9 - HandId: #4810198268682174495-55-1782827450 - Holdem no limit (100/400/800) - 2026/06/30 13:50:50 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #3 is the button
+Seat 1: Hero (13975, 1€ bounty)
+Seat 2: Vilain8 (39432, 2.20€ bounty)
+Seat 3: Vilain9 (41795, 1€ bounty)
+Seat 4: Vilain4 (35822, 1€ bounty)
+Seat 5: Vilain2 (73110, 1.44€ bounty)
+Seat 6: Vilain5 (19800, 1€ bounty)
+*** ANTE/BLINDS ***
+Vilain4 posts ante 100
+Vilain2 posts ante 100
+Hero posts ante 100
+Vilain8 posts ante 100
+Vilain9 posts ante 100
+Vilain5 posts ante 100
+Vilain4 posts small blind 400
+Vilain2 posts big blind 800
+Dealt to Hero [9d Ks]
+*** PRE-FLOP *** 
+Vilain5 folds
+Hero raises 1200 to 2000
+Vilain8 calls 2000
+Vilain9 folds
+Vilain4 raises 4000 to 6000
+Vilain2 folds
+Hero folds
+Vilain8 folds
+Vilain4 collected 11400 from pot
+*** SUMMARY ***
+Total pot 11400 | No rake
+Seat 4: Vilain4 (small blind) won 11400
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 9 - HandId: #4810198268682174495-56-1782827514 - Holdem no limit (100/400/800) - 2026/06/30 13:51:54 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #4 is the button
+Seat 1: Hero (11875, 1€ bounty)
+Seat 2: Vilain8 (37332, 2.20€ bounty)
+Seat 3: Vilain9 (41695, 1€ bounty)
+Seat 4: Vilain4 (41122, 1€ bounty)
+Seat 5: Vilain2 (72210, 1.44€ bounty)
+Seat 6: Vilain5 (19700, 1€ bounty)
+*** ANTE/BLINDS ***
+Vilain2 posts ante 100
+Vilain5 posts ante 100
+Hero posts ante 100
+Vilain8 posts ante 100
+Vilain9 posts ante 100
+Vilain4 posts ante 100
+Vilain2 posts small blind 400
+Vilain5 posts big blind 800
+Dealt to Hero [3d 6h]
+*** PRE-FLOP *** 
+Hero folds
+Vilain8 raises 1200 to 2000
+Vilain9 folds
+Vilain4 raises 4000 to 6000
+Vilain2 folds
+Vilain5 folds
+Vilain8 calls 4000
+*** FLOP *** [Qs Kh 4h]
+Vilain8 bets 6900
+Vilain4 folds
+Vilain8 collected 20700 from pot
+*** SUMMARY ***
+Total pot 20700 | No rake
+Board: [Qs Kh 4h]
+Seat 2: Vilain8 won 20700
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 10 - HandId: #4810198268682174495-57-1782827560 - Holdem no limit (120/500/1000) - 2026/06/30 13:52:40 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #5 is the button
+Seat 1: Hero (11775, 1€ bounty)
+Seat 2: Vilain8 (45032, 2.20€ bounty)
+Seat 3: Vilain9 (41595, 1€ bounty)
+Seat 4: Vilain4 (35022, 1€ bounty)
+Seat 5: Vilain2 (71710, 1.44€ bounty)
+Seat 6: Vilain5 (18800, 1€ bounty)
+*** ANTE/BLINDS ***
+Vilain5 posts ante 120
+Hero posts ante 120
+Vilain8 posts ante 120
+Vilain9 posts ante 120
+Vilain4 posts ante 120
+Vilain2 posts ante 120
+Vilain5 posts small blind 500
+Hero posts big blind 1000
+Dealt to Hero [Tc Qs]
+*** PRE-FLOP *** 
+Vilain8 calls 1000
+Vilain9 folds
+Vilain4 folds
+Vilain2 calls 1000
+Vilain5 raises 17680 to 18680 and is all-in
+Hero folds
+Vilain8 folds
+Vilain2 calls 17680
+*** FLOP *** [Jh 4d 2s]
+*** TURN *** [Jh 4d 2s][7s]
+*** RIVER *** [Jh 4d 2s 7s][Kh]
+*** SHOW DOWN ***
+Vilain5 shows [Jd Qc] (One pair : Jacks)
+Vilain2 shows [Kd 6d] (One pair : Kings)
+Vilain2 collected 40080 from pot
+*** SUMMARY ***
+Total pot 40080 | No rake
+Board: [Jh 4d 2s 7s Kh]
+Seat 5: Vilain2 (button) showed [Kd 6d] and won 40080 with One pair : Kings
+Seat 6: Vilain5 (small blind) showed [Jd Qc] and lost with One pair : Jacks
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 10 - HandId: #4810198268682174495-58-1782827599 - Holdem no limit (120/500/1000) - 2026/06/30 13:53:19 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #6 is the button
+Seat 1: Hero (10655, 1€ bounty)
+Seat 2: Vilain8 (43912, 2.20€ bounty)
+Seat 3: Vilain9 (41475, 1€ bounty)
+Seat 4: Vilain4 (34902, 1€ bounty)
+Seat 5: Vilain2 (92990, 2.94€ bounty)
+*** ANTE/BLINDS ***
+Hero posts ante 120
+Vilain8 posts ante 120
+Vilain9 posts ante 120
+Vilain4 posts ante 120
+Vilain2 posts ante 120
+Hero posts small blind 500
+Vilain8 posts big blind 1000
+Dealt to Hero [Th 6c]
+*** PRE-FLOP *** 
+Vilain9 folds
+Vilain4 folds
+Vilain2 raises 1000 to 2000
+Hero folds
+Vilain8 calls 1000
+*** FLOP *** [9h Js 5s]
+Vilain8 checks
+Vilain2 bets 2550
+Vilain8 calls 2550
+*** TURN *** [9h Js 5s][9s]
+Vilain8 checks
+Vilain2 checks
+*** RIVER *** [9h Js 5s 9s][Kd]
+Vilain8 checks
+Vilain2 bets 8160
+Vilain8 raises 8160 to 16320
+Vilain2 raises 72000 to 88320 and is all-in
+Vilain8 calls 22922 and is all-in
+*** SHOW DOWN ***
+Vilain8 shows [7s As] (Flush Ace high)
+Vilain2 shows [8s Ks] (Flush King high)
+Vilain2 collected 49078 from side pot 1
+Vilain8 collected 88684 from main pot
+*** SUMMARY ***
+Total pot 137762 | No rake
+Board: [9h Js 5s 9s Kd]
+Seat 2: Vilain8 (big blind) showed [7s As] and won 88684 with Flush Ace high
+Seat 5: Vilain2 showed [8s Ks] and won 49078 with Flush King high
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 10 - HandId: #4810198268682174495-59-1782827670 - Holdem no limit (120/500/1000) - 2026/06/30 13:54:30 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #1 is the button
+Seat 1: Hero (10035, 1€ bounty)
+Seat 2: Vilain8 (88684, 2.20€ bounty)
+Seat 3: Vilain9 (41355, 1€ bounty)
+Seat 4: Vilain4 (34782, 1€ bounty)
+Seat 5: Vilain2 (49078, 2.94€ bounty)
+Seat 6: Vilain6 (20000, 1€ bounty)
+*** ANTE/BLINDS ***
+Vilain8 posts ante 120
+Vilain9 posts ante 120
+Hero posts ante 120
+Vilain4 posts ante 120
+Vilain2 posts ante 120
+Vilain6 posts ante 120
+Vilain8 posts small blind 500
+Vilain9 posts big blind 1000
+Dealt to Hero [8d Jh]
+*** PRE-FLOP *** 
+Vilain4 folds
+Vilain2 raises 1500 to 2500
+Vilain6 folds
+Hero raises 7415 to 9915 and is all-in
+Vilain8 folds
+Vilain9 folds
+Vilain2 raises 7415 to 17330
+*** FLOP *** [6c 8h Js]
+*** TURN *** [6c 8h Js][Qs]
+*** RIVER *** [6c 8h Js Qs][2s]
+*** SHOW DOWN ***
+Hero shows [8d Jh] (Two pairs : Jacks and 8)
+Vilain2 shows [Qd As] (One pair : Queens)
+Vilain2 collected 7415 from side pot 1
+Hero collected 22050 from main pot
+*** SUMMARY ***
+Total pot 29465 | No rake
+Board: [6c 8h Js Qs 2s]
+Seat 1: Hero (button) showed [8d Jh] and won 22050 with Two pairs : Jacks and 8
+Seat 5: Vilain2 showed [Qd As] and won 7415 with One pair : Queens
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 10 - HandId: #4810198268682174495-60-1782828060 - Holdem no limit (120/500/1000) - 2026/06/30 14:01:00 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #2 is the button
+Seat 1: Hero (22050, 1€ bounty)
+Seat 2: Vilain8 (88064, 2.20€ bounty)
+Seat 3: Vilain9 (40235, 1€ bounty)
+Seat 4: Vilain4 (34662, 1€ bounty)
+Seat 5: Vilain2 (39043, 2.94€ bounty)
+Seat 6: Vilain6 (19880, 1€ bounty)
+*** ANTE/BLINDS ***
+Vilain9 posts ante 120
+Vilain4 posts ante 120
+Hero posts ante 120
+Vilain8 posts ante 120
+Vilain2 posts ante 120
+Vilain6 posts ante 120
+Vilain9 posts small blind 500
+Vilain4 posts big blind 1000
+Dealt to Hero [4d Ah]
+*** PRE-FLOP *** 
+Vilain2 raises 1000 to 2000
+Vilain6 folds
+Hero folds
+Vilain8 folds
+Vilain9 folds
+Vilain4 calls 1000
+*** FLOP *** [2c Qs 2d]
+Vilain4 bets 3393
+Vilain2 folds
+Vilain4 collected 8613 from pot
+*** SUMMARY ***
+Total pot 8613 | No rake
+Board: [2c Qs 2d]
+Seat 4: Vilain4 (big blind) won 8613
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 10 - HandId: #4810198268682174495-61-1782828092 - Holdem no limit (120/500/1000) - 2026/06/30 14:01:32 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #3 is the button
+Seat 1: Hero (21930, 1€ bounty)
+Seat 2: Vilain8 (87944, 2.20€ bounty)
+Seat 3: Vilain9 (39615, 1€ bounty)
+Seat 4: Vilain4 (37762, 1€ bounty)
+Seat 5: Vilain2 (36923, 2.94€ bounty)
+Seat 6: Vilain6 (19760, 1€ bounty)
+*** ANTE/BLINDS ***
+Vilain4 posts ante 120
+Vilain2 posts ante 120
+Hero posts ante 120
+Vilain8 posts ante 120
+Vilain9 posts ante 120
+Vilain6 posts ante 120
+Vilain4 posts small blind 500
+Vilain2 posts big blind 1000
+Dealt to Hero [3c 8c]
+*** PRE-FLOP *** 
+Vilain6 folds
+Hero folds
+Vilain8 folds
+Vilain9 folds
+Vilain4 folds
+Vilain2 collected 2220 from pot
+*** SUMMARY ***
+Total pot 2220 | No rake
+Seat 5: Vilain2 (big blind) won 2220
+
+
+Winamax Poker - Tournament "SPACE KO" buyIn: 1.80€ + 0.20€ level: 11 - HandId: #4810198268682174495-62-1782828179 - Holdem no limit (140/600/1200) - 2026/06/30 14:02:59 UTC
+Table: 'SPACE KO(1119961559)#0030' 6-max (real money) Seat #4 is the button
+Seat 1: Hero (21810, 1€ bounty)
+Seat 2: Vilain8 (87824, 2.20€ bounty)
+Seat 3: Vilain9 (39495, 1€ bounty)
+Seat 4: Vilain4 (37142, 1€ bounty)
+Seat 5: Vilain2 (38023, 2.94€ bounty)
+Seat 6: Vilain6 (19640, 1€ bounty)
+*** ANTE/BLINDS ***
+Vilain2 posts ante 140
+Vilain6 posts ante 140
+Hero posts ante 140
+Vilain8 posts ante 140
+Vilain9 posts ante 140
+Vilain4 posts ante 140
+Vilain2 posts small blind 600
+Vilain6 posts big blind 1200
+Dealt to Hero [Ad 9c]
+*** PRE-FLOP *** 
+Hero raises 1800 to 3000
+Vilain8 folds
+Vilain9 folds
+Vilain4 folds
+Vilain2 calls 2400
+Vilain6 folds
+*** FLOP *** [5s 6h 2h]
+Vilain2 checks
+Hero bets 2814
+Vilain2 calls 2814
+*** TURN *** [5s 6h 2h][9h]
+Vilain2 checks
+Hero bets 6834
+Vilain2 raises 25235 to 32069 and is all-in
+Hero calls 9022 and is all-in
+*** RIVER *** [5s 6h 2h 9h][8s]
+*** SHOW DOWN ***
+Hero shows [Ad 9c] (One pair : 9)
+Vilain2 shows [5d 5c] (Trips of 5)
+Vilain2 collected 61593 from pot
+*** SUMMARY ***
+Total pot 61593 | No rake
+Board: [5s 6h 2h 9h 8s]
+Seat 1: Hero showed [Ad 9c] and lost with One pair : 9
+Seat 5: Vilain2 (small blind) showed [5d 5c] and won 61593 with Trips of 5
+
+

@@ -1,0 +1,241 @@
+Winamax Poker - Tournament "Expresso" buyIn: 0.46€ + 0.04€ level: 1 - HandId: #4946434554001883137-1-1784407378 - Holdem no limit (10/20) - 2026/07/18 20:42:58 UTC
+Table: 'Expresso(1151681541)#0' 3-max (real money) Seat #3 is the button
+Seat 1: Vilain1 (500)
+Seat 2: Hero (500)
+Seat 3: Vilain2 (500)
+*** ANTE/BLINDS ***
+Vilain1 posts small blind 10
+Hero posts big blind 20
+Dealt to Hero [5s 4h]
+*** PRE-FLOP *** 
+Vilain2 folds
+Vilain1 calls 10
+Hero checks
+*** FLOP *** [Ts 2c 6d]
+Vilain1 bets 20
+Hero calls 20
+*** TURN *** [Ts 2c 6d][Td]
+Vilain1 checks
+Hero bets 40
+Vilain1 folds
+Hero collected 120 from pot
+*** SUMMARY ***
+Total pot 120 | No rake
+Board: [Ts 2c 6d Td]
+Seat 2: Hero (big blind) won 120
+
+
+Winamax Poker - Tournament "Expresso" buyIn: 0.46€ + 0.04€ level: 1 - HandId: #4946434554001883137-2-1784407406 - Holdem no limit (10/20) - 2026/07/18 20:43:26 UTC
+Table: 'Expresso(1151681541)#0' 3-max (real money) Seat #1 is the button
+Seat 1: Vilain1 (460)
+Seat 2: Hero (540)
+Seat 3: Vilain2 (500)
+*** ANTE/BLINDS ***
+Hero posts small blind 10
+Vilain2 posts big blind 20
+Dealt to Hero [8c 4h]
+*** PRE-FLOP *** 
+Vilain1 raises 30 to 50
+Hero folds
+Vilain2 folds
+Vilain1 collected 80 from pot
+*** SUMMARY ***
+Total pot 80 | No rake
+Seat 1: Vilain1 (button) won 80
+
+
+Winamax Poker - Tournament "Expresso" buyIn: 0.46€ + 0.04€ level: 1 - HandId: #4946434554001883137-3-1784407415 - Holdem no limit (10/20) - 2026/07/18 20:43:35 UTC
+Table: 'Expresso(1151681541)#0' 3-max (real money) Seat #2 is the button
+Seat 1: Vilain1 (490)
+Seat 2: Hero (530)
+Seat 3: Vilain2 (480)
+*** ANTE/BLINDS ***
+Vilain2 posts small blind 10
+Vilain1 posts big blind 20
+Dealt to Hero [Qc 4h]
+*** PRE-FLOP *** 
+Hero folds
+Vilain2 folds
+Vilain1 collected 30 from pot
+*** SUMMARY ***
+Total pot 30 | No rake
+Seat 1: Vilain1 (big blind) won 30
+
+
+Winamax Poker - Tournament "Expresso" buyIn: 0.46€ + 0.04€ level: 1 - HandId: #4946434554001883137-4-1784407420 - Holdem no limit (10/20) - 2026/07/18 20:43:40 UTC
+Table: 'Expresso(1151681541)#0' 3-max (real money) Seat #3 is the button
+Seat 1: Vilain1 (500)
+Seat 2: Hero (530)
+Seat 3: Vilain2 (470)
+*** ANTE/BLINDS ***
+Vilain1 posts small blind 10
+Hero posts big blind 20
+Dealt to Hero [Ts Qd]
+*** PRE-FLOP *** 
+Vilain2 folds
+Vilain1 raises 30 to 50
+Hero calls 30
+*** FLOP *** [Kc 2s Jd]
+Vilain1 bets 50
+Hero calls 50
+*** TURN *** [Kc 2s Jd][Ad]
+Vilain1 bets 60
+Hero raises 60 to 120
+Vilain1 calls 60
+*** RIVER *** [Kc 2s Jd Ad][8c]
+Vilain1 checks
+Hero bets 310 and is all-in
+Vilain1 folds
+Hero collected 750 from pot
+*** SUMMARY ***
+Total pot 750 | No rake
+Board: [Kc 2s Jd Ad 8c]
+Seat 2: Hero (big blind) won 750
+
+
+Winamax Poker - Tournament "Expresso" buyIn: 0.46€ + 0.04€ level: 1 - HandId: #4946434554001883137-5-1784407461 - Holdem no limit (10/20) - 2026/07/18 20:44:21 UTC
+Table: 'Expresso(1151681541)#0' 3-max (real money) Seat #1 is the button
+Seat 1: Vilain1 (280)
+Seat 2: Hero (750)
+Seat 3: Vilain2 (470)
+*** ANTE/BLINDS ***
+Hero posts small blind 10
+Vilain2 posts big blind 20
+Dealt to Hero [Ad 8d]
+*** PRE-FLOP *** 
+Vilain1 calls 20
+Hero raises 20 to 40
+Vilain2 folds
+Vilain1 calls 20
+*** FLOP *** [5h 7c 5d]
+Hero checks
+Vilain1 bets 30
+Hero calls 30
+*** TURN *** [5h 7c 5d][9d]
+Hero checks
+Vilain1 checks
+*** RIVER *** [5h 7c 5d 9d][Jc]
+Hero bets 80
+Vilain1 folds
+Hero collected 240 from pot
+*** SUMMARY ***
+Total pot 240 | No rake
+Board: [5h 7c 5d 9d Jc]
+Seat 2: Hero (small blind) won 240
+
+
+Winamax Poker - Tournament "Expresso" buyIn: 0.46€ + 0.04€ level: 2 - HandId: #4946434554001883137-6-1784407514 - Holdem no limit (15/30) - 2026/07/18 20:45:14 UTC
+Table: 'Expresso(1151681541)#0' 3-max (real money) Seat #2 is the button
+Seat 1: Vilain1 (210)
+Seat 2: Hero (840)
+Seat 3: Vilain2 (450)
+*** ANTE/BLINDS ***
+Vilain2 posts small blind 15
+Vilain1 posts big blind 30
+Dealt to Hero [5c 3h]
+*** PRE-FLOP *** 
+Hero raises 30 to 60
+Vilain2 calls 45
+Vilain1 raises 150 to 210 and is all-in
+Hero folds
+Vilain2 calls 150
+*** FLOP *** [9s Js 8d]
+*** TURN *** [9s Js 8d][9h]
+*** RIVER *** [9s Js 8d 9h][4s]
+*** SHOW DOWN ***
+Vilain1 shows [Ah Jd] (Two pairs : Jacks and 9)
+Vilain2 shows [5d 9d] (Trips of 9)
+Vilain2 collected 480 from pot
+*** SUMMARY ***
+Total pot 480 | No rake
+Board: [9s Js 8d 9h 4s]
+Seat 1: Vilain1 (big blind) showed [Ah Jd] and lost with Two pairs : Jacks and 9
+Seat 3: Vilain2 (small blind) showed [5d 9d] and won 480 with Trips of 9
+
+
+Winamax Poker - Tournament "Expresso" buyIn: 0.46€ + 0.04€ level: 2 - HandId: #4946434554001883137-7-1784407547 - Holdem no limit (15/30) - 2026/07/18 20:45:47 UTC
+Table: 'Expresso(1151681541)#0' 3-max (real money) Seat #2 is the button
+Seat 2: Hero (780)
+Seat 3: Vilain2 (720)
+*** ANTE/BLINDS ***
+Hero posts small blind 15
+Vilain2 posts big blind 30
+Dealt to Hero [Ts Kh]
+*** PRE-FLOP *** 
+Hero raises 30 to 60
+Vilain2 calls 30
+*** FLOP *** [Kc 3s 3c]
+Vilain2 checks
+Hero bets 30
+Vilain2 calls 30
+*** TURN *** [Kc 3s 3c][2c]
+Vilain2 checks
+Hero bets 90
+Vilain2 calls 90
+*** RIVER *** [Kc 3s 3c 2c][6d]
+Vilain2 checks
+Hero bets 288
+Vilain2 raises 252 to 540 and is all-in
+Hero calls 252
+*** SHOW DOWN ***
+Hero shows [Ts Kh] (Two pairs : Kings and 3)
+Vilain2 shows [3d 4d] (Trips of 3)
+Vilain2 collected 1440 from pot
+*** SUMMARY ***
+Total pot 1440 | No rake
+Board: [Kc 3s 3c 2c 6d]
+Seat 2: Hero (small blind) (button) showed [Ts Kh] and lost with Two pairs : Kings and 3
+Seat 3: Vilain2 (big blind) showed [3d 4d] and won 1440 with Trips of 3
+
+
+Winamax Poker - Tournament "Expresso" buyIn: 0.46€ + 0.04€ level: 3 - HandId: #4946434554001883137-8-1784407586 - Holdem no limit (20/40) - 2026/07/18 20:46:26 UTC
+Table: 'Expresso(1151681541)#0' 3-max (real money) Seat #3 is the button
+Seat 2: Hero (60)
+Seat 3: Vilain2 (1440)
+*** ANTE/BLINDS ***
+Vilain2 posts small blind 20
+Hero posts big blind 40
+Dealt to Hero [8h Qc]
+*** PRE-FLOP *** 
+Vilain2 raises 40 to 80
+Hero calls 20 and is all-in
+*** FLOP *** [Kh Jc 7d]
+*** TURN *** [Kh Jc 7d][9c]
+*** RIVER *** [Kh Jc 7d 9c][As]
+*** SHOW DOWN ***
+Hero shows [8h Qc] (High card : Ace)
+Vilain2 shows [5h 2c] (High card : Ace)
+Vilain2 collected 20 from side pot 1
+Hero collected 120 from main pot
+*** SUMMARY ***
+Total pot 140 | No rake
+Board: [Kh Jc 7d 9c As]
+Seat 2: Hero (big blind) showed [8h Qc] and won 120 with High card : Ace
+Seat 3: Vilain2 (small blind) (button) showed [5h 2c] and won 20 with High card : Ace
+
+
+Winamax Poker - Tournament "Expresso" buyIn: 0.46€ + 0.04€ level: 3 - HandId: #4946434554001883137-9-1784407598 - Holdem no limit (20/40) - 2026/07/18 20:46:38 UTC
+Table: 'Expresso(1151681541)#0' 3-max (real money) Seat #2 is the button
+Seat 2: Hero (120)
+Seat 3: Vilain2 (1380)
+*** ANTE/BLINDS ***
+Hero posts small blind 20
+Vilain2 posts big blind 40
+Dealt to Hero [Qc 5h]
+*** PRE-FLOP *** 
+Hero raises 80 to 120 and is all-in
+Vilain2 calls 80
+*** FLOP *** [9h 2h Th]
+*** TURN *** [9h 2h Th][Qs]
+*** RIVER *** [9h 2h Th Qs][4d]
+*** SHOW DOWN ***
+Hero shows [Qc 5h] (One pair : Queens)
+Vilain2 shows [Qh 2s] (Two pairs : Queens and 2)
+Vilain2 collected 240 from pot
+*** SUMMARY ***
+Total pot 240 | No rake
+Board: [9h 2h Th Qs 4d]
+Seat 2: Hero (small blind) (button) showed [Qc 5h] and lost with One pair : Queens
+Seat 3: Vilain2 (big blind) showed [Qh 2s] and won 240 with Two pairs : Queens and 2
+
+
