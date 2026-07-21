@@ -11,6 +11,7 @@ import { rejouer, type EtapeRejeu } from "@/analysis/replay";
 import { derivePositions } from "@/analysis/positions";
 import { verdictEquite } from "@/analysis/verdict";
 import { alternatives, type RangAlt } from "@/analysis/alternatives";
+import { nashPushFold } from "@/analysis/nashPushFold";
 import { eur } from "@/lib/format";
 
 const CARD: React.CSSProperties = {
@@ -355,6 +356,29 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
   const netColor = netMain > 0 ? "var(--gain)" : netMain < 0 ? "var(--loss)" : "#FAFAFA";
   const netChips = `${netMain > 0 ? "+" : netMain < 0 ? "−" : ""}${Math.abs(netMain).toLocaleString("fr-FR")}`;
 
+  // Verdict push/fold Nash — heads-up préflop uniquement (rigoureux sur ce sous-jeu).
+  const nash = (() => {
+    if (!heroActe || !heroJoueur?.cartes || e.street !== "preflop") return null;
+    if (main.joueurs.length !== 2) return null; // heads-up seulement
+    const heroPos = positions.get(heroJoueur.seat);
+    const effBB = Math.min(...main.joueurs.map((j) => j.tapisDebut)) / bb;
+    const prevPre = etapes.slice(0, s).filter((x) => x.street === "preflop");
+    let role: "sb" | "bb" | null = null;
+    if (heroPos === "SB" && prevPre.length === 0) role = "sb"; // open-shove (le SB parle en 1er en HU)
+    else if (heroPos === "BB" && prevPre.length === 1 && prevPre[0].action.type === "raise" && prevPre[0].action.allIn) role = "bb";
+    if (!role) return null;
+    const res = nashPushFold(heroJoueur.cartes, effBB, role);
+    if (!res) return null;
+    // Ce que le Hero a fait, et si ça suit la reco.
+    const pousse = e.action.type === "raise" && e.action.allIn;
+    const paye = e.action.type === "call" && e.action.allIn;
+    const folde = e.action.type === "fold";
+    const suitPushFold = role === "sb" ? pousse || folde : paye || folde;
+    const conforme =
+      res.recommandation === "fold" ? folde : role === "sb" ? pousse : paye;
+    return { ...res, role, suitPushFold, conforme };
+  })();
+
   // Alternatives du spot (pour le Hero uniquement). Préflop non relancé = "limp".
   const preflopUnraised =
     e.street === "preflop" &&
@@ -490,6 +514,46 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
               hint={e.street === "preflop" ? "dès le flop" : undefined}
             />
           </div>
+
+          {/* Verdict push/fold Nash (heads-up préflop) — le plus rigoureux, mis en avant */}
+          {nash && (
+            <div
+              style={{
+                marginTop: 18,
+                padding: "14px 16px",
+                borderRadius: 10,
+                background: "rgba(99,102,241,0.06)",
+                border: "1px solid",
+                borderColor: nash.conforme ? "var(--gain)" : "var(--loss)",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+                <span style={overline}>
+                  Push/fold Nash · heads-up · {nash.depth} BB ({nash.role === "sb" ? "tu ouvres" : "tu paies un tapis"})
+                </span>
+                <span style={{ fontSize: 11, color: "#C7C7CE" }}>≈ équilibre calculé</span>
+              </div>
+              <div style={{ marginTop: 10, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+                <span style={{ fontSize: 16, fontWeight: 700, color: "#FAFAFA" }}>
+                  Nash&nbsp;:{" "}
+                  <span style={{ color: nash.recommandation === "fold" ? "var(--loss)" : "var(--gain)" }}>
+                    {nash.recommandation === "push" ? "SHOVE" : nash.recommandation === "call" ? "CALL" : "FOLD"}
+                  </span>
+                </span>
+                <span style={{ fontSize: 14, fontWeight: 700, color: nash.conforme ? "var(--gain)" : "var(--loss)" }}>
+                  {nash.conforme ? "✓ décision conforme" : nash.suitPushFold ? "✗ écart au Nash" : "✗ hors push/fold"}
+                </span>
+              </div>
+              <div style={{ fontSize: 11, color: "#C7C7CE", marginTop: 8, lineHeight: 1.5 }}>
+                {nash.recommandation === "fold"
+                  ? "À cette profondeur, cette main n'est pas rentable à l'équilibre."
+                  : nash.role === "sb"
+                    ? "À l'équilibre, envoyer le tapis est +EV avec cette main à cette profondeur."
+                    : "À l'équilibre, payer le tapis est +EV avec cette main à cette profondeur."}
+                {" "}Winner-take-all HU → chipEV ≈ ICM. Bruit possible sur les mains marginales.
+              </div>
+            </div>
+          )}
 
           {/* Analyse de la décision — visuelle et colorée */}
           <div style={{ marginTop: 18, paddingTop: 16, borderTop: "1px solid #27272A", display: "flex", flexDirection: "column", gap: 10 }}>
