@@ -12,6 +12,7 @@ import { derivePositions } from "@/analysis/positions";
 import { verdictEquite } from "@/analysis/verdict";
 import { alternatives, type RangAlt } from "@/analysis/alternatives";
 import { nashPushFold } from "@/analysis/nashPushFold";
+import { nash3max, type Node3 } from "@/analysis/nash3max";
 import { eur } from "@/lib/format";
 
 const CARD: React.CSSProperties = {
@@ -408,6 +409,38 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
     return { ...res, role, suitPushFold, conforme, troisMax };
   })();
 
+  // Verdict push/fold 3-MAX (≈) — spots non couverts par le SB-vs-BB ci-dessus :
+  // BTN open-jam, SB call vs BTN-jam, BB call vs BTN-jam. 3 joueurs encore en jeu.
+  const nash3 = (() => {
+    if (nash || !heroActe || !heroJoueur?.cartes || e.street !== "preflop") return null;
+    if (main.joueurs.length < 3) return null;
+    const heroPos = positions.get(heroJoueur.seat);
+    let btnSeat: number | undefined;
+    positions.forEach((lab, seat) => { if (lab === "BTN") btnSeat = seat; });
+    const prevAggr = etapes
+      .slice(0, s)
+      .filter((x) => x.street === "preflop" && x.action.type !== "fold");
+    const btnJammed = prevAggr.length >= 1 && prevAggr[0].seat === btnSeat && prevAggr[0].action.type === "raise" && prevAggr[0].action.allIn;
+
+    let node: Node3 | null = null;
+    if (heroPos === "BTN" && prevAggr.length === 0) node = "btnJam"; // BTN 1er à parler, non ouvert
+    else if (heroPos === "SB" && btnJammed && prevAggr.length === 1) node = "sbCallVsBtn";
+    else if (heroPos === "BB" && btnJammed) node = "bbCallVsBtn";
+    if (!node) return null;
+
+    // Tapis effectif = plus petit tapis parmi les joueurs encore en jeu (approx).
+    const enJeu = e.sieges.filter((si) => !si.couche).map((si) => main.joueurs.find((j) => j.seat === si.seat)!.tapisDebut);
+    const effBB = Math.min(...enJeu) / bb;
+    const res = nash3max(heroJoueur.cartes, effBB, node);
+    if (!res) return null;
+    const pousse = e.action.type === "raise" && e.action.allIn;
+    const paye = e.action.type === "call" && e.action.allIn;
+    const folde = e.action.type === "fold";
+    const suitPushFold = node === "btnJam" ? pousse || folde : paye || folde;
+    const conforme = res.recommandation === "fold" ? folde : node === "btnJam" ? pousse : paye;
+    return { ...res, suitPushFold, conforme };
+  })();
+
   // Alternatives du spot (pour le Hero uniquement). Préflop non relancé = "limp".
   const preflopUnraised =
     e.street === "preflop" &&
@@ -580,6 +613,43 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
                     ? "À l'équilibre, envoyer le tapis est +EV avec cette main à cette profondeur."
                     : "À l'équilibre, payer le tapis est +EV avec cette main à cette profondeur."}
                 {" "}Winner-take-all HU → chipEV ≈ ICM. Bruit possible sur les mains marginales.
+              </div>
+            </div>
+          )}
+
+          {/* Verdict push/fold 3-max (≈) — BTN open-jam / call vs BTN-jam */}
+          {nash3 && (
+            <div
+              style={{
+                marginTop: 18,
+                padding: "14px 16px",
+                borderRadius: 10,
+                background: "rgba(99,102,241,0.06)",
+                border: "1px solid",
+                borderColor: nash3.conforme ? "var(--gain)" : "var(--loss)",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+                <span style={overline}>
+                  Push/fold Nash · 3-max · {nash3.depth} BB (
+                  {nash3.node === "btnJam" ? "tu ouvres au bouton" : nash3.node === "sbCallVsBtn" ? "tu paies le jam du BTN (SB)" : "tu paies le jam du BTN (BB)"})
+                </span>
+                <span style={{ fontSize: 11, color: "#C7C7CE" }}>≈ approximation</span>
+              </div>
+              <div style={{ marginTop: 10, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+                <span style={{ fontSize: 16, fontWeight: 700, color: "#FAFAFA" }}>
+                  Nash&nbsp;:{" "}
+                  <span style={{ color: nash3.recommandation === "fold" ? "var(--loss)" : "var(--gain)" }}>
+                    {nash3.recommandation === "push" ? "SHOVE" : nash3.recommandation === "call" ? "CALL" : "FOLD"}
+                  </span>
+                </span>
+                <span style={{ fontSize: 14, fontWeight: 700, color: nash3.conforme ? "var(--gain)" : "var(--loss)" }}>
+                  {nash3.conforme ? "✓ décision conforme" : nash3.suitPushFold ? "✗ écart au Nash" : "✗ hors push/fold"}
+                </span>
+              </div>
+              <div style={{ fontSize: 11, color: "#C7C7CE", marginTop: 8, lineHeight: 1.5 }}>
+                Solveur 3-max chipEV (= ICM winner-take-all), tapis égaux, calleurs indépendants — approximation
+                pédagogique, pas un solveur exact. Bruit possible sur les mains marginales.
               </div>
             </div>
           )}

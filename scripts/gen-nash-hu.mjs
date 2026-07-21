@@ -112,6 +112,54 @@ function solve(S) {
   return { push, call };
 }
 
+const fracOf = (freq) => classes.reduce((s, c, j) => s + c.combos * freq[j], 0) / totalCombos;
+const eqVsFreq = (i, freq) => {
+  let num = 0, den = 0;
+  for (let j = 0; j < N; j++) {
+    const c = classes[j].combos * freq[j];
+    if (c > 0) { num += c * E[i][j]; den += c; }
+  }
+  return den ? num / den : 0.5;
+};
+const merged = (a, b) => { const m = new Float64Array(N); for (let j = 0; j < N; j++) m[j] = Math.max(a[j], b[j]); return m; };
+
+/**
+ * Équilibre push/fold 3-MAX (tapis égaux S), approximation « calleurs
+ * indépendants » + équité 3-way approximée (range fusionnée). chipEV.
+ * Nodes : BTN open-jam, SB call vs BTN-jam, BB call vs BTN-jam.
+ * (SB-open / BB-vs-SB restent couverts par la table heads-up.)
+ */
+function solve3max(S) {
+  const btn = new Float64Array(N).fill(0.35);
+  const sbc = new Float64Array(N).fill(0.25);
+  const bbc = new Float64Array(N).fill(0.25);
+  const bs = new Float64Array(N), ss = new Float64Array(N), bbs = new Float64Array(N);
+  const ITERS = 300;
+  for (let it = 1; it <= ITERS; it++) {
+    const cSB = fracOf(sbc), cBB = fracOf(bbc);
+    for (let i = 0; i < N; i++) {
+      // BTN : jam si EV > 0 (fold = 0)
+      const eSb = eqVsFreq(i, sbc), eBb = eqVsFreq(i, bbc), e3 = eqVsFreq(i, merged(sbc, bbc));
+      const evJam =
+        (1 - cSB) * (1 - cBB) * 1.5 +
+        cSB * (1 - cBB) * (eSb * (2 * S + 1) - S) +
+        (1 - cSB) * cBB * (eBb * (2 * S + 0.5) - S) +
+        cSB * cBB * (e3 * 3 * S - S);
+      bs[i] += evJam > 0 ? 1 : 0;
+      // SB call vs BTN jam : call si EV > -0,5
+      const e2s = eqVsFreq(i, btn), e3s = eqVsFreq(i, merged(btn, bbc));
+      const evCallSb = (1 - cBB) * (e2s * (2 * S + 1) - S) + cBB * (e3s * 3 * S - S);
+      ss[i] += evCallSb > -0.5 ? 1 : 0;
+      // BB call vs BTN jam (SB couché) : call si EV > -1
+      const e2b = eqVsFreq(i, btn);
+      bbs[i] += e2b * (2 * S + 0.5) - S > -1 ? 1 : 0;
+    }
+    for (let i = 0; i < N; i++) { btn[i] = bs[i] / it; sbc[i] = ss[i] / it; bbc[i] = bbs[i] / it; }
+  }
+  const range = (f) => classes.filter((_, i) => f[i] >= 0.5).map((c) => c.name);
+  return { btnJam: range(btn), sbCallVsBtn: range(sbc), bbCallVsBtn: range(bbc) };
+}
+
 // Push/fold pertinent en tapis court seulement → plafond 20 BB (au-delà : postflop).
 const depths = [];
 for (let x = 2; x <= 20; x += 0.5) depths.push(x);
@@ -134,3 +182,22 @@ console.log("AA push @20bb ?", table[20].push.includes("AA"), "| 72o push @20bb 
 const out = fileURLToPath(new URL("../src/analysis/data/nashHU.json", import.meta.url));
 writeFileSync(out, JSON.stringify({ generatedSamples: SAMPLES, depths, table }, null, 0));
 console.log("Écrit :", out);
+
+// Matrice d'équité préflop 169×169 (pour le solveur 3-max runtime) — arrondie 3 déc.
+const names = classes.map((c) => c.name);
+const combos = classes.map((c) => c.combos);
+const Erounded = E.map((row) => Array.from(row, (v) => Math.round(v * 1000) / 1000));
+const outE = fileURLToPath(new URL("../src/analysis/data/preflopEquity.json", import.meta.url));
+writeFileSync(outE, JSON.stringify({ names, combos, E: Erounded }, null, 0));
+console.log("Écrit :", outE);
+
+// Table push/fold 3-MAX (par tapis effectif, tapis égaux).
+console.log("Solve 3-max…");
+const table3 = {};
+for (const S of depths) table3[S] = solve3max(S);
+const pctOf = (arr) => Math.round((arr.reduce((s, n) => s + combosOf(n), 0) / totalCombos) * 100);
+console.log("BTN open-jam % @8bb:", pctOf(table3[8].btnJam), "@12bb:", pctOf(table3[12].btnJam), "@20bb:", pctOf(table3[20].btnJam));
+console.log("BB call-vs-BTN % @10bb:", pctOf(table3[10].bbCallVsBtn), "| AA btnJam @20bb ?", table3[20].btnJam.includes("AA"));
+const out3 = fileURLToPath(new URL("../src/analysis/data/nash3max.json", import.meta.url));
+writeFileSync(out3, JSON.stringify({ generatedSamples: SAMPLES, depths, table: table3 }, null, 0));
+console.log("Écrit :", out3);
