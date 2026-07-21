@@ -51,6 +51,24 @@ describe("aggregate", () => {
     expect(a.bankrollCurrent).toBe(50);
   });
 
+  it("calcule le taux de victoire par format + buy-in", () => {
+    const t = [
+      mk({ buyIn: 0.5, profit: 1.0 }), // gagné
+      mk({ buyIn: 0.5, profit: -0.5 }), // perdu
+      mk({ buyIn: 0.5, profit: -0.5 }), // perdu
+      mk({ buyIn: 0.5, profit: 2.0 }), // gagné
+      mk({ buyIn: 1, profit: -1 }), // autre buy-in, perdu
+    ];
+    const a = aggregate(t, 50);
+    const wr05 = a.winRates.find((w) => w.buyIn === 0.5 && w.format === "expresso")!;
+    expect(wr05.parties).toBe(4);
+    expect(wr05.wins).toBe(2);
+    expect(wr05.winRate).toBeCloseTo(0.5, 5);
+    const wr1 = a.winRates.find((w) => w.buyIn === 1)!;
+    expect(wr1.parties).toBe(1);
+    expect(wr1.winRate).toBe(0);
+  });
+
   it("gère une base vide", () => {
     const a = aggregate([], 50);
     expect(a.volume).toBe(0);

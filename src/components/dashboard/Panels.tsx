@@ -215,6 +215,94 @@ export function MultiplierDistribution({ agg }: { agg: Aggregates }) {
   );
 }
 
+/* ---------------- Taux de victoire par format + buy-in ---------------- */
+const FORMAT_LABEL: Record<string, string> = { expresso: "Expresso", mtt: "MTT", other: "Autre" };
+
+/**
+ * Paliers de win-rate pour les Spins (Expresso) 3-max — victoire = finir 1er.
+ * Repères APPROXIMATIFS (le baseline neutre du 3-max ≈ 33 %). Seuils = bornes basses.
+ */
+const SPIN_TIERS = [
+  { min: 41, label: "ultra-gagnant", color: "#16A34A" },
+  { min: 38.5, label: "gagnant", color: "#4ADE80" },
+  { min: 36, label: "break-even", color: "#D4A017" },
+  { min: 33, label: "perdant", color: "#F97316" },
+  { min: 0, label: "ultra-perdant", color: "#DC2626" },
+];
+function spinTier(pctVal: number) {
+  return SPIN_TIERS.find((t) => pctVal >= t.min)!;
+}
+
+export function WinRates({ agg }: { agg: Aggregates }) {
+  // Trié du plus joué au moins joué (les buckets significatifs d'abord).
+  const rows = [...agg.winRates].sort((a, b) => b.parties - a.parties);
+  const aDesSpins = rows.some((w) => w.format === "expresso");
+  return (
+    <div style={{ ...CARD, padding: "22px 24px" }}>
+      <div style={{ fontSize: 13, fontWeight: 600, color: "#FAFAFA" }}>Taux de victoire</div>
+      <div style={{ fontSize: 12, color: "#71717A", marginTop: 3 }}>
+        Par format et buy-in · victoire = fini en bénéfice
+      </div>
+      <div style={{ marginTop: 20, display: "flex", flexDirection: "column", gap: 16 }}>
+        {rows.length === 0 && <div style={{ fontSize: 13, color: "#52525B" }}>Aucune donnée.</div>}
+        {rows.map((w) => {
+          const pctVal = w.winRate * 100;
+          const isSpin = w.format === "expresso";
+          const tier = isSpin ? spinTier(pctVal) : null;
+          const color = tier ? tier.color : "#71717A"; // paliers Spin, sinon neutre
+          return (
+            <div key={w.key} style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 8 }}>
+                <span style={{ fontSize: 14, color: "#FAFAFA", minWidth: 0 }}>
+                  {FORMAT_LABEL[w.format] ?? w.format}{" "}
+                  <span style={{ fontFamily: MONO, color: "#A1A1AA" }}>{eur(w.buyIn)}</span>
+                  {tier && (
+                    <span style={{ fontSize: 12, color: tier.color, marginLeft: 8, fontWeight: 600 }}>{tier.label}</span>
+                  )}
+                </span>
+                <span style={{ display: "flex", alignItems: "baseline", gap: 8, flex: "none" }}>
+                  <span style={{ fontFamily: MONO, fontSize: 20, fontWeight: 600, color, fontVariantNumeric: "tabular-nums" }}>
+                    {pctVal.toFixed(1)} %
+                  </span>
+                  <span style={{ fontFamily: MONO, fontSize: 12, color: "#71717A" }}>
+                    {w.wins}/{w.parties}
+                  </span>
+                </span>
+              </div>
+              <div style={{ position: "relative", height: 8, background: "#1A1A1E", borderRadius: 999, overflow: "hidden" }}>
+                <div style={{ width: `${Math.min(100, pctVal)}%`, height: "100%", background: color, opacity: 0.9, borderRadius: 999 }} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {aDesSpins && (
+        <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px solid #27272A" }}>
+          <div style={{ ...overline, marginBottom: 10 }}>Repères Spin (≈, 3-max)</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 14px" }}>
+            {[
+              { c: "#DC2626", t: "< 33 % ultra-perdant" },
+              { c: "#F97316", t: "33 % perdant" },
+              { c: "#D4A017", t: "36 % break-even" },
+              { c: "#4ADE80", t: "38,5 % gagnant" },
+              { c: "#16A34A", t: "> 41 % ultra-gagnant" },
+            ].map((l) => (
+              <span key={l.t} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11, color: "#A1A1AA" }}>
+                <span style={{ width: 8, height: 8, borderRadius: 2, background: l.c, flex: "none" }} />
+                {l.t}
+              </span>
+            ))}
+          </div>
+          <div style={{ fontSize: 11, color: "#52525B", marginTop: 10, lineHeight: 1.5 }}>
+            Repères approximatifs, valables uniquement pour les Spins (Expresso) 3-max. Les autres formats ne sont pas notés.
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ---------------- Répartition par format ---------------- */
 export function FormatSplit({ agg }: { agg: Aggregates }) {
   const total = agg.formatSplit.reduce((s, f) => s + f.parties, 0);

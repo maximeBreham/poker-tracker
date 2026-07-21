@@ -14,6 +14,7 @@ import {
   MultiplierDistribution,
   ReportBanner,
   TopBar,
+  WinRates,
 } from "@/components/dashboard/Panels";
 
 function shortFolder(p: string): string {
@@ -169,7 +170,10 @@ function App() {
               <KpiRow agg={agg} />
               <div style={{ display: "grid", gridTemplateColumns: "1.15fr 1fr", gap: 16 }}>
                 <MultiplierDistribution agg={agg} />
-                <FormatSplit agg={agg} />
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  <WinRates agg={agg} />
+                  <FormatSplit agg={agg} />
+                </div>
               </div>
               <MonthlyTable agg={agg} />
             </div>

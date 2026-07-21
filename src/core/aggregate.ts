@@ -30,6 +30,16 @@ export interface FormatStat {
   roi: number;
 }
 
+export interface WinRateStat {
+  key: string; // "expresso#0.5"
+  format: FormatStat["key"];
+  buyIn: number;
+  parties: number;
+  wins: number; // parties finies en bénéfice (Expresso winner-take-all → 1re place)
+  winRate: number; // wins / parties (0..1)
+  net: number;
+}
+
 export interface MonthStat {
   key: string; // "2026-07"
   label: string; // "Juillet 2026"
@@ -51,6 +61,7 @@ export interface Aggregates {
   bankrollCurve: BankrollPoint[];
   distribution: MultiplierBucket[];
   formatSplit: FormatStat[];
+  winRates: WinRateStat[];
   monthly: MonthStat[];
 }
 
@@ -134,6 +145,30 @@ export function aggregate(
     }))
     .sort((a, b) => b.parties - a.parties);
 
+  // Taux de victoire par format + buy-in (victoire = profit > 0 ;
+  // pour l'Expresso winner-take-all, cela équivaut à finir 1er).
+  const wrMap = new Map<string, { format: FormatStat["key"]; buyIn: number; parties: number; wins: number; net: number }>();
+  for (const t of tournois) {
+    const format = FORMAT_GROUP[t.format];
+    const key = `${format}#${t.buyIn}`;
+    const cur = wrMap.get(key) ?? { format, buyIn: t.buyIn, parties: 0, wins: 0, net: 0 };
+    cur.parties += 1;
+    if (t.profit > 0) cur.wins += 1;
+    cur.net = round2(cur.net + t.profit);
+    wrMap.set(key, cur);
+  }
+  const winRates: WinRateStat[] = [...wrMap.entries()]
+    .map(([key, v]) => ({
+      key,
+      format: v.format,
+      buyIn: v.buyIn,
+      parties: v.parties,
+      wins: v.wins,
+      winRate: v.parties > 0 ? v.wins / v.parties : 0,
+      net: v.net,
+    }))
+    .sort((a, b) => a.format.localeCompare(b.format) || a.buyIn - b.buyIn);
+
   // Bilan mensuel (Europe/Paris)
   const monMap = new Map<string, { label: string; parties: number; invested: number; net: number }>();
   for (const t of tournois) {
@@ -173,6 +208,7 @@ export function aggregate(
     bankrollCurve,
     distribution,
     formatSplit,
+    winRates,
     monthly,
   };
 }
