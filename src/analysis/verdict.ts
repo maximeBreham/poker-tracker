@@ -9,7 +9,8 @@
  */
 import type { Main } from "../parsing/handTypes";
 import type { EtapeRejeu } from "./replay";
-import { equite, equiteVsHasard } from "./equity";
+import { equite } from "./equity";
+import { equiteVsRange, topRangeClasses, profilParBuyIn } from "./ranges";
 
 export interface VerdictEquite {
   /** Équité du Hero (0..1) sur cette étape. */
@@ -17,29 +18,32 @@ export interface VerdictEquite {
   /**
    * Base du calcul :
    *  - "montree" : vs les cartes réellement montrées à l'abattage (a posteriori, fiable) ;
-   *  - "hasard"  : vs des mains adverses au hasard (repère indicatif, sans abattage).
+   *  - "range"   : vs une range adverse modélisée (largeur selon buy-in) — hypothèse, sans abattage.
    */
-  base: "montree" | "hasard";
+  base: "montree" | "range";
   /** true si énumération exacte, false si Monte-Carlo. */
   exact: boolean;
   /** Cote à payer (pot odds) sur cette étape, ou null si rien à suivre. */
   cote: number | null;
-  /** Équité ≥ cote ? null s'il n'y a rien à suivre. (Indicatif si base = "hasard".) */
+  /** Équité ≥ cote ? null s'il n'y a rien à suivre. (Indicatif si base = "range".) */
   rentable: boolean | null;
-  /** Nombre d'adversaires pris en compte (montrés, ou encore en jeu pour le hasard). */
+  /** Nombre d'adversaires pris en compte (montrés, ou encore en jeu pour la range). */
   nbAdversaires: number;
+  /** Largeur de range utilisée (base "range"), fraction 0..1. */
+  rangePct?: number;
 }
 
 /**
  * Analyse d'équité d'une étape. Toujours calculable dès que le Hero a des cartes :
  *  - s'il y a abattage → équité vs les mains montrées (fiable) ;
- *  - sinon → équité vs main(s) au hasard des adversaires encore en jeu (repère).
+ *  - sinon → équité vs une RANGE adverse modélisée (largeur = profil par buy-in,
+ *    ou `rangePct` fourni). Hypothèse, pas une vérité — à présenter comme tel.
  * Renvoie null seulement si les cartes du Hero sont inconnues.
  */
 export function verdictEquite(
   main: Main,
   etape: EtapeRejeu,
-  samples = 8000,
+  opts?: { samples?: number; rangePct?: number },
 ): VerdictEquite | null {
   const hero = main.joueurs.find((j) => j.isHero);
   if (!hero?.cartes) return null;
@@ -47,7 +51,7 @@ export function verdictEquite(
 
   const montres = main.joueurs.filter((j) => !j.isHero && j.cartes);
   if (montres.length > 0) {
-    const e = equite(hero.cartes, montres.map((v) => v.cartes!), etape.board, samples);
+    const e = equite(hero.cartes, montres.map((v) => v.cartes!), etape.board, opts?.samples ?? 8000);
     if (!e) return null;
     return {
       equity: e.equity,
@@ -59,16 +63,18 @@ export function verdictEquite(
     };
   }
 
-  // Pas d'abattage : équité vs main(s) au hasard des adversaires encore en jeu.
+  // Pas d'abattage : équité vs une range modélisée (largeur selon le buy-in, ajustable).
+  const pct = opts?.rangePct ?? profilParBuyIn(main.buyIn).pct;
   const actifs = Math.max(1, etape.sieges.filter((s) => !s.couche && s.seat !== hero.seat).length);
-  const e = equiteVsHasard(hero.cartes, etape.board, actifs, Math.max(12000, samples));
-  if (!e) return null;
+  const eq = equiteVsRange(hero.cartes, etape.board, topRangeClasses(pct), opts?.samples ?? 6000);
+  if (eq == null) return null;
   return {
-    equity: e.equity,
-    base: "hasard",
+    equity: eq,
+    base: "range",
     exact: false,
     cote,
-    rentable: cote != null ? e.equity >= cote : null,
+    rentable: cote != null ? eq >= cote : null,
     nbAdversaires: actifs,
+    rangePct: pct,
   };
 }

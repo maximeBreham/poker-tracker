@@ -13,6 +13,7 @@ import { verdictEquite } from "@/analysis/verdict";
 import { alternatives, type RangAlt } from "@/analysis/alternatives";
 import { nashPushFold } from "@/analysis/nashPushFold";
 import { nash3max, type Node3 } from "@/analysis/nash3max";
+import { profilParBuyIn, PROFILS } from "@/analysis/ranges";
 import { eur } from "@/lib/format";
 
 const CARD: React.CSSProperties = {
@@ -280,6 +281,8 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
   const [filtre, setFiltre] = useState<string | null>(null); // format sélectionné (null = tous)
   // Tournois dépliés (repliés par défaut). Celui de la main courante s'ouvre auto.
   const [ouverts, setOuverts] = useState<Set<string>>(new Set());
+  // Profil adverse pour l'équité vs range (hors abattage). "auto" = déduit du buy-in.
+  const [profilCle, setProfilCle] = useState<string>("auto");
 
   const main = mains[handIdx];
   const etapes = useMemo(() => (main ? rejouer(main) : []), [main]);
@@ -314,11 +317,18 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
     if (tournoiCourant) setOuverts((prev) => (prev.has(tournoiCourant) ? prev : new Set(prev).add(tournoiCourant)));
   }, [tournoiCourant]);
 
+  // Largeur de range adverse (profil) : "auto" = déduit du buy-in, sinon manuel.
+  const rangePct = main
+    ? profilCle === "auto"
+      ? profilParBuyIn(main.buyIn).pct
+      : (PROFILS.find((p) => p.cle === profilCle)?.pct ?? profilParBuyIn(main.buyIn).pct)
+    : 0.4;
+
   // Verdicts d'équité pré-calculés pour TOUTES les étapes de la main (une fois par
-  // main) → le passage d'une étape à l'autre est ensuite instantané (simple lookup).
+  // main / profil) → le passage d'une étape à l'autre est ensuite instantané.
   const verdicts = useMemo(
-    () => (main ? etapes.map((et) => verdictEquite(main, et)) : []),
-    [main, etapes],
+    () => (main ? etapes.map((et) => verdictEquite(main, et, { rangePct })) : []),
+    [main, etapes, rangePct],
   );
 
   if (!main || etapes.length === 0) {
@@ -675,7 +685,7 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
                 )}
                 {verdict && (
                   <div style={{ fontSize: 11, color: "#C7C7CE" }}>
-                    Ton équité : {pct(verdict.equity)} — {verdict.base === "montree" ? "vs les cartes montrées (a posteriori)" : "vs une main au hasard (indicatif)"}.
+                    Ton équité : {pct(verdict.equity)} — {verdict.base === "montree" ? "vs les cartes montrées (a posteriori)" : `vs range top ${Math.round((verdict.rangePct ?? rangePct) * 100)}% (modèle)`}.
                   </div>
                 )}
               </>
@@ -689,7 +699,7 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
                 const montree = verdict?.base === "montree";
                 const rentable = verdict?.rentable ?? null; // équité ≥ seuil
                 const bon = verdict ? (estCall ? rentable! : !rentable) : null;
-                // Vert/rouge seulement au showdown (verdict ferme) ; indigo si vs hasard (indicatif).
+                // Vert/rouge seulement au showdown (verdict ferme) ; indigo si vs range (modèle).
                 const couleur = !verdict ? "#3F3F46" : montree ? (bon ? "var(--gain)" : "var(--loss)") : "var(--accent-indigo)";
                 return (
                   <>
@@ -706,7 +716,7 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
                               : "✓ fold correct"}
                         </span>
                       ) : verdict ? (
-                        <span style={{ fontSize: 12, color: "#C7C7CE" }}>indicatif · vs main au hasard</span>
+                        <span style={{ fontSize: 12, color: "#C7C7CE" }}>modèle · vs range top {Math.round((verdict.rangePct ?? rangePct) * 100)}%</span>
                       ) : (
                         <span style={{ fontSize: 12, color: "#C7C7CE" }}>équité inconnue</span>
                       )}
@@ -729,8 +739,11 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
                             : rentable
                               ? `Tu avais ${pct(verdict.equity)} ≥ ${pct(seuil)} → tu as lâché un call rentable.`
                               : `Tu n'avais que ${pct(verdict.equity)} < ${pct(seuil)} → coucher était correct.`
-                          : `Contre une main au hasard : ${pct(verdict.equity)} (seuil ${pct(seuil)}). Indicatif — un adversaire qui mise a souvent mieux, ton équité réelle est sans doute plus basse.`}
+                          : `Vs une range top ${Math.round((verdict.rangePct ?? rangePct) * 100)}% : ${pct(verdict.equity)} (seuil ${pct(seuil)}). Modèle paramétré par le buy-in — ajuste le profil ci-dessous.`}
                     </div>
+                    {!montree && verdict && (
+                      <ProfilSelector cle={profilCle} onChange={setProfilCle} buyIn={main.buyIn} />
+                    )}
                   </>
                 );
               })()
@@ -744,7 +757,7 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
             <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
               <span style={overline}>Alternatives à ce moment</span>
               <span style={{ fontSize: 11, color: "#C7C7CE" }}>
-                {verdict?.base === "montree" ? "classées par EV (abattage connu)" : "indicatif — équité non fiable"}
+                {verdict?.base === "montree" ? "classées par EV (abattage connu)" : "indicatif — équité vs range (modèle)"}
               </span>
             </div>
             <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 8 }}>
@@ -970,6 +983,48 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
           );
         })}
       </aside>
+    </div>
+  );
+}
+
+/** Sélecteur de profil adverse (largeur de range) — Auto (par buy-in) ou manuel. */
+function ProfilSelector({
+  cle,
+  onChange,
+  buyIn,
+}: {
+  cle: string;
+  onChange: (c: string) => void;
+  buyIn: number;
+}) {
+  const autoLabel = profilParBuyIn(buyIn).label;
+  const options = [{ cle: "auto", label: `Auto (${autoLabel})` }, ...PROFILS];
+  return (
+    <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 6, marginTop: 4 }}>
+      <span style={{ fontSize: 11, color: "#C7C7CE", marginRight: 2 }}>Profil adverse :</span>
+      {options.map((o) => {
+        const actif = cle === o.cle;
+        return (
+          <button
+            key={o.cle}
+            onClick={() => onChange(o.cle)}
+            style={{
+              font: "inherit",
+              fontSize: 11,
+              fontWeight: 600,
+              color: actif ? "#09090B" : "#C7C7CE",
+              background: actif ? "var(--accent-indigo)" : "transparent",
+              border: "1px solid",
+              borderColor: actif ? "var(--accent-indigo)" : "#27272A",
+              borderRadius: 999,
+              padding: "2px 9px",
+              cursor: "pointer",
+            }}
+          >
+            {o.label}
+          </button>
+        );
+      })}
     </div>
   );
 }

@@ -27,14 +27,23 @@ describe("verdictEquite", () => {
     expect(v!.nbAdversaires).toBeGreaterThanOrEqual(1);
   });
 
-  it("base « hasard » sans abattage (main 4 : l'adversaire se couche)", () => {
+  it("base « range » sans abattage (main 4 : l'adversaire se couche)", () => {
     const m = expresso[3];
     const et = rejouer(m);
     const v = verdictEquite(m, et[0]);
     expect(v).not.toBeNull();
-    expect(v!.base).toBe("hasard");
+    expect(v!.base).toBe("range");
+    expect(v!.rangePct).toBeGreaterThan(0);
     expect(v!.equity).toBeGreaterThan(0);
     expect(v!.equity).toBeLessThan(1);
+  });
+
+  it("une range plus serrée baisse l'équité du Hero (main faible)", () => {
+    const m = expresso[3];
+    const et = rejouer(m);
+    const large = verdictEquite(m, et[0], { rangePct: 0.7 })!.equity;
+    const serre = verdictEquite(m, et[0], { rangePct: 0.15 })!.equity;
+    expect(serre).toBeLessThanOrEqual(large + 0.02); // vs range serrée = plus dur (tolérance MC)
   });
 
   it("qualifie la rentabilité d'un call quand il y a une cote", () => {
