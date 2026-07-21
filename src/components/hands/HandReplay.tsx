@@ -356,27 +356,56 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
   const netColor = netMain > 0 ? "var(--gain)" : netMain < 0 ? "var(--loss)" : "#FAFAFA";
   const netChips = `${netMain > 0 ? "+" : netMain < 0 ? "−" : ""}${Math.abs(netMain).toLocaleString("fr-FR")}`;
 
-  // Verdict push/fold Nash — heads-up préflop uniquement (rigoureux sur ce sous-jeu).
+  // Verdict push/fold Nash — spot SB vs BB : vrai heads-up (2 joueurs) OU 3-handed
+  // où le BTN s'est couché (fold to SB). Sous winner-take-all, le tapis du BTN
+  // couché n'influe pas → le sous-jeu SB/BB est exactement le heads-up déjà résolu.
   const nash = (() => {
     if (!heroActe || !heroJoueur?.cartes || e.street !== "preflop") return null;
-    if (main.joueurs.length !== 2) return null; // heads-up seulement
     const heroPos = positions.get(heroJoueur.seat);
-    const effBB = Math.min(...main.joueurs.map((j) => j.tapisDebut)) / bb;
-    const prevPre = etapes.slice(0, s).filter((x) => x.street === "preflop");
+    if (heroPos !== "SB" && heroPos !== "BB") return null;
+    let sbSeat: number | undefined, bbSeat: number | undefined;
+    positions.forEach((lab, seat) => {
+      if (lab === "SB") sbSeat = seat;
+      if (lab === "BB") bbSeat = seat;
+    });
+    // Adversaires encore en jeu (non couchés) avant l'action du Hero.
+    const oppIn = e.sieges.filter((si) => !si.couche && si.seat !== heroJoueur.seat).map((s) => s.seat);
+    // Actions volontaires préflop avant le Hero, hors folds (= agression).
+    const prevAggr = etapes
+      .slice(0, s)
+      .filter((x) => x.street === "preflop" && x.action.type !== "fold");
+
     let role: "sb" | "bb" | null = null;
-    if (heroPos === "SB" && prevPre.length === 0) role = "sb"; // open-shove (le SB parle en 1er en HU)
-    else if (heroPos === "BB" && prevPre.length === 1 && prevPre[0].action.type === "raise" && prevPre[0].action.allIn) role = "bb";
-    if (!role) return null;
+    let oppSeat: number | undefined;
+    if (heroPos === "SB" && oppIn.length === 1 && oppIn[0] === bbSeat && prevAggr.length === 0) {
+      role = "sb"; // le BTN (s'il existe) s'est couché → open-shove SB vs BB
+      oppSeat = bbSeat;
+    } else if (
+      heroPos === "BB" &&
+      oppIn.length === 1 &&
+      oppIn[0] === sbSeat &&
+      prevAggr.length === 1 &&
+      prevAggr[0].seat === sbSeat &&
+      prevAggr[0].action.type === "raise" &&
+      prevAggr[0].action.allIn
+    ) {
+      role = "bb"; // BTN couché, SB a shove → BB paie ou fold
+      oppSeat = sbSeat;
+    }
+    if (!role || oppSeat == null) return null;
+
+    const oppTapis = main.joueurs.find((j) => j.seat === oppSeat)!.tapisDebut;
+    const effBB = Math.min(heroJoueur.tapisDebut, oppTapis) / bb;
     const res = nashPushFold(heroJoueur.cartes, effBB, role);
     if (!res) return null;
-    // Ce que le Hero a fait, et si ça suit la reco.
     const pousse = e.action.type === "raise" && e.action.allIn;
     const paye = e.action.type === "call" && e.action.allIn;
     const folde = e.action.type === "fold";
     const suitPushFold = role === "sb" ? pousse || folde : paye || folde;
-    const conforme =
-      res.recommandation === "fold" ? folde : role === "sb" ? pousse : paye;
-    return { ...res, role, suitPushFold, conforme };
+    const conforme = res.recommandation === "fold" ? folde : role === "sb" ? pousse : paye;
+    // 3-handed (fold to SB) vs vrai heads-up, pour l'affichage.
+    const troisMax = main.joueurs.length > 2;
+    return { ...res, role, suitPushFold, conforme, troisMax };
   })();
 
   // Alternatives du spot (pour le Hero uniquement). Préflop non relancé = "limp".
@@ -529,7 +558,7 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
             >
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
                 <span style={overline}>
-                  Push/fold Nash · heads-up · {nash.depth} BB ({nash.role === "sb" ? "tu ouvres" : "tu paies un tapis"})
+                  Push/fold Nash · SB vs BB{nash.troisMax ? " (BTN couché)" : ""} · {nash.depth} BB ({nash.role === "sb" ? "tu ouvres" : "tu paies un tapis"})
                 </span>
                 <span style={{ fontSize: 11, color: "#C7C7CE" }}>≈ équilibre calculé</span>
               </div>
