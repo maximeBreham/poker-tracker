@@ -8,7 +8,8 @@ import { scanFolder, type ImportReport } from "@/datasource/scan";
 import { createJsonStorage } from "@/storage/json";
 import { DEFAULT_APP_DATA, type AppData } from "@/storage/types";
 import type { Tournoi } from "@/parsing/types";
-import { loadFixtureTournois } from "./fixtures";
+import type { Main } from "@/parsing/handTypes";
+import { loadFixtureTournois, loadFixtureMains } from "./fixtures";
 
 const source = createTauriDataSource();
 const storage = createJsonStorage();
@@ -18,6 +19,7 @@ export type Mode = "loading" | "tauri" | "demo";
 export function useDatabase() {
   const [appData, setAppData] = useState<AppData>(DEFAULT_APP_DATA);
   const [demoTournois, setDemoTournois] = useState<Tournoi[]>([]);
+  const [demoMains, setDemoMains] = useState<Main[]>([]);
   const [mode, setMode] = useState<Mode>("loading");
   const [report, setReport] = useState<ImportReport | null>(null);
   const [busy, setBusy] = useState(false);
@@ -63,6 +65,7 @@ export function useDatabase() {
     (async () => {
       if (!source.isAvailable()) {
         setDemoTournois(loadFixtureTournois());
+        setDemoMains(loadFixtureMains());
         setMode("demo");
         return;
       }
@@ -139,12 +142,20 @@ export function useDatabase() {
   }, []);
 
   const tournois = mode === "demo" ? demoTournois : Object.values(appData.tournois);
+  // Mains triées chronologiquement (puis par n°) pour un rejeu dans l'ordre de jeu.
+  const mains =
+    mode === "demo"
+      ? demoMains
+      : Object.values(appData.mains).sort(
+          (a, b) => a.startedAt.localeCompare(b.startedAt) || a.numero - b.numero,
+        );
 
   return {
     mode,
     busy,
     report,
     tournois,
+    mains,
     folder: appData.settings.folder,
     lastScan: appData.settings.lastScan,
     startingBankroll: mode === "demo" ? 50 : appData.settings.startingBankroll,

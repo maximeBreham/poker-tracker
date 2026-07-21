@@ -10,6 +10,9 @@ export interface SummaryFile {
   mtime: number; // date de modif (ms) — pour le scan incrémental
 }
 
+/** Fichier hand-history (mains jouées) — même forme que SummaryFile. */
+export type HandFile = SummaryFile;
+
 export interface DataSource {
   /** true si cette source est disponible dans l'environnement courant (Tauri présent). */
   isAvailable(): boolean;
@@ -19,6 +22,8 @@ export interface DataSource {
   pickDir(): Promise<string | null>;
   /** Liste les fichiers résumé (*_summary.txt) d'un dossier. */
   listSummaryFiles(dir: string): Promise<SummaryFile[]>;
+  /** Liste les fichiers hand-history (*.txt hors *_summary.txt) d'un dossier. */
+  listHandFiles(dir: string): Promise<HandFile[]>;
   /** Lit le contenu texte d'un fichier. */
   readFile(path: string): Promise<string>;
   /** Surveille le dossier ; renvoie une fonction pour arrêter la surveillance. */

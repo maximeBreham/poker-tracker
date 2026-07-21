@@ -106,18 +106,21 @@ export function ActionButton({
 export function ReportBanner({
   reparsed,
   parsedTournois,
+  parsedMains,
   ignored,
   firstErrorRaw,
 }: {
   reparsed: number;
   parsedTournois: number;
+  parsedMains?: number;
   ignored: number;
   firstErrorRaw?: string;
 }) {
   return (
     <div style={{ margin: "0 28px", marginTop: 20, border: "1px solid #27272A", borderRadius: 10, background: "#0E0E11", padding: "12px 16px" }}>
       <div style={{ fontFamily: MONO, fontSize: 12, color: "#A1A1AA" }}>
-        Import · <span style={{ color: "var(--gain)" }}>{parsedTournois} tournois</span> depuis {reparsed} fichier(s) ·{" "}
+        Import · <span style={{ color: "var(--gain)" }}>{parsedTournois} tournois</span>
+        {parsedMains ? <> · <span style={{ color: "var(--gain)" }}>{parsedMains} mains</span></> : null} depuis {reparsed} fichier(s) ·{" "}
         <span style={{ color: ignored ? "var(--loss)" : "#71717A" }}>{ignored} bloc(s) ignoré(s)</span>
       </div>
       {ignored > 0 && firstErrorRaw && (

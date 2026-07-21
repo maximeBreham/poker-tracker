@@ -5,7 +5,6 @@ import { useDatabase } from "@/app/useDatabase";
 import { Hero } from "@/components/dashboard/Hero";
 import { SettingsPanel } from "@/components/dashboard/SettingsPanel";
 import { HandReplay } from "@/components/hands/HandReplay";
-import { loadFixtureMains } from "@/app/fixtures";
 import {
   ActionButton,
   EmptyState,
@@ -61,9 +60,6 @@ function App() {
   const [view, setView] = useState<"dashboard" | "mains">(
     params.get("view") === "mains" ? "mains" : "dashboard",
   );
-  // Mains de démonstration (fixtures) : l'ingestion des vraies hand-histories
-  // n'est pas encore branchée sur la datasource → cette vue est en démo.
-  const demoMains = useMemo(() => loadFixtureMains(), []);
 
   // La bankroll affichée = départ + net poker + ajustement externe (mouvements non-poker).
   // On injecte l'ajustement dans la base de calcul → bankroll & courbe collent au solde réel,
@@ -147,13 +143,21 @@ function App() {
       />
 
       {view === "mains" ? (
-        <HandReplay mains={demoMains} />
+        db.mains.length > 0 ? (
+          <HandReplay mains={db.mains} demo={isDemo} />
+        ) : (
+          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: 40, textAlign: "center", color: "#A1A1AA", fontSize: 14, lineHeight: 1.6 }}>
+            Aucune main à analyser pour l'instant.<br />
+            Les mains sont lues dans les fichiers d'historique Winamax (hand-histories) du dossier sélectionné.
+          </div>
+        )
       ) : (
         <>
           {db.report && (db.report.reparsed > 0 || db.report.ignored > 0) && (
             <ReportBanner
               reparsed={db.report.reparsed}
               parsedTournois={db.report.parsedTournois}
+              parsedMains={db.report.parsedMains}
               ignored={db.report.ignored}
               firstErrorRaw={db.report.firstError?.raw}
             />

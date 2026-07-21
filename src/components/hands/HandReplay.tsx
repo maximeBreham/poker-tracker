@@ -272,7 +272,7 @@ function heroNet(main: Main): number {
 }
 
 /* ---------------- Écran ---------------- */
-export function HandReplay({ mains }: { mains: Main[] }) {
+export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: boolean }) {
   const [handIdx, setHandIdx] = useState(0);
   const [step, setStep] = useState(0);
   const [filtre, setFiltre] = useState<string | null>(null); // format sélectionné (null = tous)
@@ -390,7 +390,7 @@ export function HandReplay({ mains }: { mains: Main[] }) {
                 <span style={{ fontSize: 16, fontWeight: 700, color: "#FAFAFA" }}>{main.tournoiNom}</span>
                 <span style={{ fontFamily: MONO, fontSize: 13, color: "#C7C7CE" }}>{eur(main.buyIn)}</span>
                 <span style={{ fontSize: 13, color: "#C7C7CE" }}>· Main #{main.numero}</span>
-                <span style={{ fontFamily: MONO, fontSize: 11, color: "#C7C7CE" }}>démo</span>
+                {demo && <span style={{ fontFamily: MONO, fontSize: 11, color: "#C7C7CE" }}>démo</span>}
               </div>
               <div style={{ fontFamily: MONO, fontSize: 12, color: "#C7C7CE", marginTop: 3 }}>
                 niveau {main.level} · blindes {main.blinds.sb}/{main.blinds.bb}{anteTxt} · {main.maxSeats}-max

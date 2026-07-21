@@ -24,6 +24,7 @@ export function createJsonStorage(): Storage {
           ...parsed,
           settings: { ...DEFAULT_APP_DATA.settings, ...parsed.settings },
           tournois: parsed.tournois ?? {},
+          mains: parsed.mains ?? {}, // migration douce v1→v2 (bases sans mains)
         };
       } catch {
         // Fichier corrompu → on repart d'une base vide plutôt que de crasher.

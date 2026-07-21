@@ -3,6 +3,7 @@
  * La base réelle vit dans le répertoire de données de l'app (hors repo).
  */
 import type { Tournoi } from "@/parsing/types";
+import type { Main } from "@/parsing/handTypes";
 
 export interface Settings {
   /** Bankroll de départ (défaut 50 €), persistée. */
@@ -26,10 +27,12 @@ export interface AppData {
   settings: Settings;
   /** Tournois cumulés, indexés par clé de déduplication. */
   tournois: Record<string, Tournoi>;
+  /** Mains jouées cumulées, indexées par HandId (parsées des hand-histories). */
+  mains: Record<string, Main>;
 }
 
 export const DEFAULT_APP_DATA: AppData = {
-  version: 1,
+  version: 2,
   settings: {
     startingBankroll: 50,
     externalAdjustment: 0,
@@ -38,6 +41,7 @@ export const DEFAULT_APP_DATA: AppData = {
     scannedFiles: {},
   },
   tournois: {},
+  mains: {},
 };
 
 export interface Storage {

@@ -29,6 +29,24 @@ async function findHistoryDirs(): Promise<string[]> {
   return out;
 }
 
+/** Liste les fichiers d'un dossier correspondant au filtre, avec leur mtime. */
+async function listByFilter(dir: string, keep: (name: string) => boolean): Promise<SummaryFile[]> {
+  const files: SummaryFile[] = [];
+  for (const entry of await readDir(dir)) {
+    if (!entry.isFile || !keep(entry.name)) continue;
+    const path = await join(dir, entry.name);
+    let mtime = 0;
+    try {
+      const info = await stat(path);
+      mtime = info.mtime ? new Date(info.mtime).getTime() : 0;
+    } catch {
+      /* stat peut échouer ponctuellement (fichier en cours d'écriture) → mtime 0 */
+    }
+    files.push({ path, name: entry.name, mtime });
+  }
+  return files;
+}
+
 export function createTauriDataSource(): DataSource {
   return {
     isAvailable: () => isTauri(),
@@ -48,20 +66,12 @@ export function createTauriDataSource(): DataSource {
     },
 
     async listSummaryFiles(dir) {
-      const files: SummaryFile[] = [];
-      for (const entry of await readDir(dir)) {
-        if (!entry.isFile || !entry.name.endsWith(SUMMARY_SUFFIX)) continue;
-        const path = await join(dir, entry.name);
-        let mtime = 0;
-        try {
-          const info = await stat(path);
-          mtime = info.mtime ? new Date(info.mtime).getTime() : 0;
-        } catch {
-          /* stat peut échouer ponctuellement (fichier en cours d'écriture) → mtime 0 */
-        }
-        files.push({ path, name: entry.name, mtime });
-      }
-      return files;
+      return listByFilter(dir, (name) => name.endsWith(SUMMARY_SUFFIX));
+    },
+
+    async listHandFiles(dir) {
+      // Hand-history = .txt SANS le suffixe _summary (chaque tournoi a les deux).
+      return listByFilter(dir, (name) => name.endsWith(".txt") && !name.endsWith(SUMMARY_SUFFIX));
     },
 
     async readFile(path) {
