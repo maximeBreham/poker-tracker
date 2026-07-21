@@ -5,7 +5,7 @@
  * des mains. On avance décision par décision. Consomme le moteur pur
  * `analysis/replay`. Les montants sont doublés en BB (repère de profondeur).
  */
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Main, Carte as CarteT } from "@/parsing/handTypes";
 import { rejouer, type EtapeRejeu } from "@/analysis/replay";
 import { derivePositions } from "@/analysis/positions";
@@ -276,7 +276,8 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
   const [handIdx, setHandIdx] = useState(0);
   const [step, setStep] = useState(0);
   const [filtre, setFiltre] = useState<string | null>(null); // format sélectionné (null = tous)
-  const [replies, setReplies] = useState<Set<string>>(new Set()); // tournoiId repliés
+  // Tournois dépliés (repliés par défaut). Celui de la main courante s'ouvre auto.
+  const [ouverts, setOuverts] = useState<Set<string>>(new Set());
 
   const main = mains[handIdx];
   const etapes = useMemo(() => (main ? rejouer(main) : []), [main]);
@@ -304,6 +305,12 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
   // Formats présents (pour les chips de filtre) + groupes visibles selon le filtre.
   const formats = useMemo(() => [...new Set(groupes.map((g) => g.format))], [groupes]);
   const groupesVisibles = filtre ? groupes.filter((g) => g.format === filtre) : groupes;
+
+  // Déplie automatiquement le tournoi de la main courante (les autres restent repliés).
+  const tournoiCourant = mains[handIdx]?.tournoiId;
+  useEffect(() => {
+    if (tournoiCourant) setOuverts((prev) => (prev.has(tournoiCourant) ? prev : new Set(prev).add(tournoiCourant)));
+  }, [tournoiCourant]);
 
   // Verdicts d'équité pré-calculés pour TOUTES les étapes de la main (une fois par
   // main) → le passage d'une étape à l'autre est ensuite instantané (simple lookup).
@@ -707,9 +714,9 @@ export function HandReplay({ mains, demo = false }: { mains: Main[]; demo?: bool
         {groupesVisibles.map((g) => {
           const netTournoi = g.items.reduce((s, x) => s + heroNet(x.m), 0);
           const dotG = netTournoi > 0 ? "var(--gain)" : netTournoi < 0 ? "var(--loss)" : "#C7C7CE";
-          const replie = replies.has(g.tournoiId);
+          const replie = !ouverts.has(g.tournoiId);
           const toggle = () =>
-            setReplies((prev) => {
+            setOuverts((prev) => {
               const next = new Set(prev);
               next.has(g.tournoiId) ? next.delete(g.tournoiId) : next.add(g.tournoiId);
               return next;
